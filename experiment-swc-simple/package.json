@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "swc ./index.ts -d dist",
+    "dev": "swc ./index.ts -w -d dist",
+    "inlineRun": "swc ./index.ts -q | node",
+    "inlineRunExample": "node -e \"console.log('console.log(\\'hi\\')')\" | node"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.144",
+    "chokidar": "^3.5.3"
+  }
+}
