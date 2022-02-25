@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "spack",
+    "dev": "spack"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.55"
+  }
+}
