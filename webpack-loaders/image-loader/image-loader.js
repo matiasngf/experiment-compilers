@@ -5,28 +5,34 @@
  */
 
 
-var fs = require('fs');
-var path = require('path')
 const { urlToRequest } = require('loader-utils');
 const { validate } = require('schema-utils');
 
+const fs = require('fs');
+const path = require('path');
+
+// A util to read the file
 function base64_encode(path) {
   var bitmap = fs.readFileSync(path);
   return Buffer.from(bitmap).toString('base64');
 }
 
+// Options that can be passed to the loader eg { esModule: false }
 const schema = {
   type: 'object',
   properties: {
-    test: {
-      type: 'string',
-    },
+    esModule: {
+      description: "By default, file-loader generates JS modules that use the ES modules syntax.",
+      type: "boolean"
+    }
   },
 };
 
+// Main loader function
 module.exports = function () {
-  const options = this.getOptions() || {};
 
+  // Get the options from the loader
+  const options = this.getOptions();
   validate(schema, options, {
     name: 'Image Loader',
     baseDataPath: 'options',
@@ -37,8 +43,11 @@ module.exports = function () {
   const base64Prefix = `data:image/${ext};base64,`
   const base64Content = base64_encode(urlRequest);
   const base64 = base64Prefix + base64Content;
+
+  // This string will be returned when you import Img from './img.png'
   const encodedData = base64;
 
+  // Use the option.esModule to define how to export the final code.
   const esModule =
       typeof options.esModule !== 'undefined' ? options.esModule : true;
 

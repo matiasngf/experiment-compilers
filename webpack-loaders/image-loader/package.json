@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "start": "node dist/bundle.js"
   },
   "devDependencies": {
     "loader-utils": "^3.2.0",
