@@ -15,7 +15,7 @@ module.exports = {
       {
         test: /\.(jpg?)|(png?)$/,
         use: {
-          loader: path.resolve('imageCompressLoader.js'),
+          loader: path.resolve('imageLoader.js'),
         }
       }
     ]

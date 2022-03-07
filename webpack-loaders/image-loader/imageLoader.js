@@ -1,7 +1,6 @@
 /** What this loader do:
  * - Get the image path
  * - Convert the image path to a base64 string (function base64_encode)
- * - Compress the image
  * - Returns the base64 in an "module.exports" variable
  */
 
@@ -29,7 +28,7 @@ module.exports = function () {
   const options = this.getOptions() || {};
 
   validate(schema, options, {
-    name: 'Example Loader',
+    name: 'Image Loader',
     baseDataPath: 'options',
   });
 
