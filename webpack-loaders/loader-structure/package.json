@@ -1,0 +1,55 @@
+{
+  "name": "loader-structure",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "repository": "matiasngf/loader-structure",
+  "author": "Matias Gonzalez Fernandez",
+  "homepage": "https://github.com/matiasngf/loader-structure",
+  "bugs": "https://github.com/matiasngf/loader-structure/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/webpack"
+  },
+  "main": "dist/cjs.js",
+  "engines": {
+    "node": ">= 10.13.0"
+  },
+  "scripts": {
+    "start": "npm run build -- -w",
+    "clean": "del-cli dist",
+    "prebuild": "npm run clean",
+    "build": "cross-env NODE_ENV=production babel src -d dist --copy-files",
+    "commitlint": "commitlint --from=master",
+    "security": "npm audit",
+    "lint:prettier": "prettier \"{**/*,*}.{js,json,md,yml,css,ts}\" --list-different",
+    "lint:js": "eslint --cache .",
+    "lint": "npm-run-all -l -p \"lint:**\"",
+    "test:only": "cross-env NODE_ENV=test jest",
+    "test:watch": "npm run test:only -- --watch",
+    "test:coverage": "npm run test:only -- --collectCoverageFrom=\"src/**/*.js\" --coverage",
+    "pretest": "npm run lint",
+    "test": "npm run test:coverage",
+    "prepare": "npm run build",
+    "release": "standard-version",
+    "defaults": "webpack-defaults"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "index.js"
+  ],
+  "peerDependencies": {
+    "webpack": "^4.0.0 || ^5.0.0"
+  },
+  "dependencies": {
+    "loader-utils": "^3.2.0",
+    "schema-utils": "^4.0.0"
+  },
+  "devDependencies": {
+    "@webpack-contrib/defaults": "^6.3.0"
+  },
+  "keywords": [
+    "webpack"
+  ]
+}
