@@ -1,3 +1,15 @@
+# loader-structure
+
+This package was created using the `@webpack-contrib/defaults`
+
+```bash
+npm install @webpack-contrib/defaults --save-dev
+npm run defaults
+```
+(In case *defaults* scritp is not added to your project, just add "defaults": "webpack-defaults" to your package.json).
+
+<div style="margin-top:50px;"></div>
+
 <div align="center">
   <a href="https://github.com/webpack/webpack">
     <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg">

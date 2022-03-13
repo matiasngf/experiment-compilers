@@ -1,5 +1,5 @@
-import { getOptions } from 'loader-utils';
-import validateOptions from 'schema-utils';
+import { urlToRequest } from 'loader-utils';
+import { validate } from 'schema-utils';
 
 import schema from './options.json';
 
@@ -8,9 +8,14 @@ export const raw = true;
 export default function loader(source) {
   const { version, webpack } = this;
 
-  const options = getOptions(this) || {};
+  const options = this.getOptions();
 
-  validateOptions(schema, options, 'Loader');
+  validate(schema, options, {
+    name: 'Image Loader',
+    baseDataPath: 'options',
+  });
+
+  const urlRequest = urlToRequest(this.resourcePath)
 
   const newSource = `
   /**
@@ -20,7 +25,7 @@ export default function loader(source) {
   /**
    * Original Source From Loader
    */
-  ${source}`;
+  module.exports = ${JSON.stringify(urlRequest)}`;
 
   return `${newSource}`;
 }
