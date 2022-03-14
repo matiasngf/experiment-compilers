@@ -34,6 +34,7 @@ And every time you import an image, yo will get the string "Hello World!".<br>
 
 ## Useful links:
 - How to write a loader: https://webpack.js.org/contribute/writing-a-loader/
+- Loader API: https://webpack.js.org/api/loaders
 - A real file-loader: https://github.com/webpack-contrib/file-loader/blob/master/src/index.js
 - A curated list of resources: https://webpack.js.org/awesome-webpack/
 - More loaders: https://github.com/orgs/webpack-contrib/repositories

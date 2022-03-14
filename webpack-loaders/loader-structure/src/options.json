@@ -1,6 +1,10 @@
 {
   "type": "object",
   "properties": {
+    "publicPath": {
+      "type": "string",
+      "description": "The public path where the assets will be server from."
+    },
     "esModule": {
       "type": "boolean",
       "description": "Enable or disable ES modules syntax.",

@@ -1,6 +1,5 @@
 const path = require("path");
 
-
 const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
@@ -14,10 +13,19 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+            loader: "babel-loader"
+        },
+      },
+      {
         test: /\.(jpg?)|(png?)$/,
         use: {
           loader: 'loader-structure',
-          options: {}
+          options: {
+            publicPath: '/public'
+          }
         }
       }
     ]
@@ -25,5 +33,6 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },
-  plugins: []
+  plugins: [],
+  target: 'node'
 }

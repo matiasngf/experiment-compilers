@@ -1,7 +1,15 @@
+import fs from 'fs'
+import path from 'path'
+
 import image from './50px.jpg'
 
-function showSrc(imgSrc) {
-  console.log(`Source of the image: ${imgSrc}`);
+function loadImage(imgSrc) {
+  return fs.readFileSync(path.join(__dirname, imgSrc));
 }
+console.log('############ IMAGE SOURCE:');
+console.log(image);
 
-showSrc(image);
+console.log('############ IMAGE BUFFER:');
+console.log(
+  loadImage(image)
+);
