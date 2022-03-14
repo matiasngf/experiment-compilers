@@ -1,6 +1,25 @@
 {
   "type": "object",
   "properties": {
+    "context": {
+      "description": "A custom file context.",
+      "type": "string"
+    },
+    "emitFile": {
+      "description": "Enables/Disables emit files.",
+      "type": "boolean"
+    },
+    "regExp": {
+      "description": "A Regular Expression to one or many parts of the target file path. The capture groups can be reused in the name property using [N] placeholder (https://github.com/webpack-contrib/file-loader#regexp).",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "instanceof": "RegExp"
+        }
+      ]
+    },
     "publicPath": {
       "type": "string",
       "description": "The public path where the assets will be server from."
