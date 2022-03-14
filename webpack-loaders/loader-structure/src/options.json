@@ -1,8 +1,10 @@
 {
   "type": "object",
   "properties": {
-    "name": {
-      "type": "boolean"
+    "esModule": {
+      "type": "boolean",
+      "description": "Enable or disable ES modules syntax.",
+      "link": "https://github.com/webpack-contrib/html-loader#esmodule"
     }
   },
   "additionalProperties": false
