@@ -7,21 +7,24 @@ The `image-loader.js` gets the path from the image and returns a base64 string.
 
 Bascially, you could write a file that contains:
 ```js
-// image-loader.js
-module.exports = function () {
+// my-basic-loader.js
+module.exports = function (content) {
+  console.log('The original imported content:', content);
   return 'module.exports = "Hello World!"';
 }
 ```
 And use it in webpack:
 ```js
 // webpack.config
-{
+const path = require("path");
+module.exports = {
+  entry: path.join(__dirname, "src", "index.js"),
   module: {
     rules: [
       {
-        test: /\.(jpg?)|(png?)$/,
+        test: /\.(jpg)|(png)$/,
         use: {
-          loader: path.resolve('image-loader.js'),
+          loader: path.resolve('my-basic-loader.js'),
         }
       }
     ]
@@ -29,16 +32,13 @@ And use it in webpack:
 }
 ```
 
-And every time you import an image, yo will get the string "Hello World!".<br>
-(This is not how a real loader is structured, but a simple example.)
+Now, every time you import an file ended in .png or .jpg, you will get the string "Hello World!":
+```js
+// index.js
+import logo from './logo.png';
 
-## Useful links:
-- How to write a loader: https://webpack.js.org/contribute/writing-a-loader/
-- Loader API: https://webpack.js.org/api/loaders
-- A real file-loader: https://github.com/webpack-contrib/file-loader/blob/master/src/index.js
-- A curated list of resources: https://webpack.js.org/awesome-webpack/
-- More loaders: https://github.com/orgs/webpack-contrib/repositories
-- https://www.npmjs.com/package/webpack-defaults
+console.log(logo === 'Hello World!'); // true
+```
 
 ## More how-tos
 
@@ -82,3 +82,28 @@ module.exports = function () {
   return `module.exports = "Hello ${name}!"`; // (This is unsafe)
 }
 ```
+
+### Emit a file
+```js
+const path = require('path');
+module.exports = function (content) {
+  const filename = path.basename(this.resourcePath)
+
+  // Build asset info
+  const assetInfo = {
+    sourceFilename: filename
+  }
+  // Emit the file to dist
+  this.emitFile(filename, content, null, assetInfo);
+}
+```
+
+## A more advanced example
+[loader-structure](../loader-structure)
+
+## Useful links:
+- How to write a loader: https://webpack.js.org/contribute/writing-a-loader/
+- Loader API: https://webpack.js.org/api/loaders
+- A real file-loader: https://github.com/webpack-contrib/file-loader/blob/master/src/index.js
+- A curated list of resources: https://webpack.js.org/awesome-webpack/
+- More loaders: https://github.com/orgs/webpack-contrib/repositories
