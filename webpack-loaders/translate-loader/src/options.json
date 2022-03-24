@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "keywords": {
+      "type": "object",
+      "description": "A key-value objects to translate the source code."
+    }
+  },
+  "additionalProperties": false
+}

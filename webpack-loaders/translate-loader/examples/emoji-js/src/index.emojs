@@ -1,0 +1,12 @@
+🤖 max(a, b) {
+  🤔 (a > b) {
+    👈 a;
+  } 🤷🏼‍♂️ {
+    👈 b;
+  }
+}
+// test the function and log the result!
+💾 maxNum = max(10, 30)
+📣('Max num is:', maxNum);
+
+
