@@ -1,7 +1,9 @@
-/* eslint-disable no-useless-escape */
 const path = require("path");
 
+const translateLoader = require('translate-loader')
+
 const isProduction = process.env.NODE_ENV === "production";
+const { emojs } = translateLoader.langs
 
 module.exports = {
   mode: isProduction ? "production" : "development",
@@ -23,18 +25,7 @@ module.exports = {
           {
             loader: "translate-loader",
             options: {
-              keywords: {
-                'function': '🤖',
-                'return': '👈',
-                'if': '🤔',
-                'true': '👍',
-                'false': '👎',
-                'else': '🤷🏼‍♂️',
-                'throw': '🔥',
-                'console\.log': '📣',
-                'typeof': '🦴',
-                'const': '💾'
-              }
+              keywords: emojs
             }
           }
         ],

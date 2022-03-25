@@ -1,4 +1,9 @@
-const loader = require('./index');
+import emojs from './langs/emojs';
 
-module.exports = loader.default;
-module.exports.raw = loader.raw;
+import loader, { raw } from './index';
+
+module.exports = loader;
+module.exports.raw = raw;
+module.exports.langs = {
+  'emojs': emojs
+};
