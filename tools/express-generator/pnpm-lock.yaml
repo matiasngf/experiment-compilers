@@ -1,5 +1,8 @@
 lockfileVersion: 5.3
 
+overrides:
+  uglify-js: npm:terser
+
 specifiers:
   '@babel/core': ^7.17.9
   '@babel/plugin-proposal-class-properties': ^7.16.7
@@ -31,6 +34,7 @@ dependencies:
   dotenv: 16.0.0
   express: 4.17.3
   webpack: 5.72.0_webpack-cli@4.9.2
+  webpack-node-externals: 3.0.0
   webpack-virtual-modules: 0.4.3
   yargs: 17.4.1
 
@@ -44,7 +48,6 @@ devDependencies:
   ts-loader: 9.2.8_typescript@4.6.3+webpack@5.72.0
   typescript: 4.6.3
   webpack-cli: 4.9.2_webpack@5.72.0
-  webpack-node-externals: 3.0.0
 
 packages:
 
@@ -3269,7 +3272,7 @@ packages:
   /webpack-node-externals/3.0.0:
     resolution: {integrity: sha512-LnL6Z3GGDPht/AigwRh2dvL9PQPFQ8skEpVrWZXLWBYmqcaojHNN0onvHzie6rq7EWKrrBfPYqNEzTJgiwEQDQ==}
     engines: {node: '>=6'}
-    dev: true
+    dev: false
 
   /webpack-sources/3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}

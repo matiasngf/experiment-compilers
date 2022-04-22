@@ -1,6 +1,6 @@
 {
   "name": "express-generator",
-  "main": "dist/express-generator.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -11,6 +11,9 @@
   "bin": {
     "express-generator": "./bin/index.js"
   },
+  "resolutions": {
+    "uglify-js": "npm:terser"
+  },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-object-rest-spread": "^7.17.3",
@@ -20,10 +23,10 @@
     "fork-ts-checker-webpack-plugin": "^7.2.1",
     "ts-loader": "^9.2.8",
     "typescript": "^4.6.3",
-    "webpack-cli": "^4.9.2",
-    "webpack-node-externals": "^3.0.0"
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
+    "webpack-node-externals": "^3.0.0",
     "@babel/core": "^7.17.9",
     "babel-loader": "^8.2.5",
     "chalk": "^5.0.1",

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const lib = require("../dist/express-generator.js");
+const lib = require("../dist/index.js");
 
 // const yargs = require("yargs");
 // const usage = "\nUsage: tran <lang_name> sentence to be translated";

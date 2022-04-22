@@ -12,11 +12,11 @@ const config = {
   externalsPresets: { node: true },
   externals: [nodeExternals({
     allowlist: (modulePath) => {
-      return !(["webpack", "webpack-virtual-modules"].includes(modulePath));
+      return !(["webpack", "webpack-virtual-modules", "webpack-node-externals"].includes(modulePath));
     }
   })],
   output: {
-    filename: "express-generator.js",
+    filename: "index.js",
     path: path.join(__dirname, "dist"),
     libraryTarget: "umd",
     globalObject: "this"
@@ -36,6 +36,9 @@ const config = {
   watchOptions: {
     aggregateTimeout: 600,
     ignored: /node_modules/,
+  },
+  optimization: {
+    minimize: false
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
