@@ -8,6 +8,9 @@
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development --watch"
   },
+  "bin": {
+    "express-generator": "./bin/index.js"
+  },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-object-rest-spread": "^7.17.3",
@@ -27,6 +30,7 @@
     "babel-loader": "^8.2.5",
     "chalk": "^5.0.1",
     "chokidar": "^3.5.3",
-    "webpack": "^5.72.0"
+    "webpack": "^5.72.0",
+    "yargs": "^17.4.1"
   }
 }

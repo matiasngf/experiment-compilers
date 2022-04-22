@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node server.js",
+    "build": "express-generator",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
