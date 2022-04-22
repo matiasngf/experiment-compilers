@@ -3,6 +3,7 @@
 import chokidar from 'chokidar';
 
 import chalk from 'chalk';
+import { handleGenerateAsync } from './handleGenerateAsync';
 
 export const compile = () => {
   const watcher = chokidar.watch('./routes/**.api.ts', {
@@ -19,8 +20,9 @@ export const compile = () => {
   .on('ready', () => {
     watcher.close();
     console.log(pathList);
-    console.log(`${chalk.bgYellow('express-gen')} build completed.`);
-    // handleGenerateAsync(pathList, 'production').then(() => {
-    // })
+    console.log(`${chalk.bgYellow('express-gen')} build started.`);
+    handleGenerateAsync(pathList, 'production').then(() => {
+      console.log(`${chalk.bgYellow('express-gen')} build completed.`);
+    })
   })
 }

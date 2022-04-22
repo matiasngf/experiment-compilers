@@ -9,7 +9,12 @@ const webpack = require('webpack');
 const config = {
   entry: path.join(__dirname, "src", "index.ts"),
   target: "node",
-  // externals: [nodeExternals()],
+  externalsPresets: { node: true },
+  externals: [nodeExternals({
+    allowlist: (modulePath) => {
+      return !(["webpack", "webpack-virtual-modules"].includes(modulePath));
+    }
+  })],
   output: {
     filename: "express-generator.js",
     path: path.join(__dirname, "dist"),
@@ -21,7 +26,7 @@ const config = {
       {
         test: /\.(jsx?)|(tsx?)$/,
         exclude: /(node_modules|bower_components)/,
-        use: ["swc-loader", "ts-loader"]
+        use: ["babel-loader", "ts-loader"]
       },
     ]
   },
