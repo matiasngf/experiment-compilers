@@ -1,0 +1,7 @@
+lockfileVersion: 5.3
+
+specifiers:
+  express-generator: ../
+
+dependencies:
+  express-generator: link:..
