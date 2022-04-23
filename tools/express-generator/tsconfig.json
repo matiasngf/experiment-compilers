@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "typeRoots": ["@types", "./node_modules/@types"],
+    "typeRoots": [
+      "src/declarations.d.ts",
+      "./node_modules/@types"
+    ],
     "module": "es6",
     "target": "ESNext",
     "moduleResolution": "node",

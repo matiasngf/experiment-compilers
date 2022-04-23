@@ -1,4 +1,10 @@
 {
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matiasngf/experiment-compilers.git"
+  },
+  "license": "ISC",
   "name": "express-generator",
   "main": "dist/index.js",
   "files": [
@@ -26,7 +32,6 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "webpack-node-externals": "^3.0.0",
     "@babel/core": "^7.17.9",
     "babel-loader": "^8.2.5",
     "chalk": "^5.0.1",
@@ -34,7 +39,9 @@
     "del": "^6.0.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "handlebars": "^4.7.7",
     "webpack": "^5.72.0",
+    "webpack-node-externals": "^3.0.0",
     "webpack-virtual-modules": "^0.4.3",
     "yargs": "^17.4.1"
   }

@@ -9,7 +9,7 @@ export type GenerateMode = 'development' | 'production';
 
 export const handleGenerate = (pathList: string[], mode: GenerateMode, callback?: Function) => {
   // Delete previous generated files
-  if (!fs.existsSync(generatedDir)){
+  if (!fs.existsSync(generatedDir)) {
       fs.mkdirSync(generatedDir);
   }
   del.sync(`${generatedDir}/**`);

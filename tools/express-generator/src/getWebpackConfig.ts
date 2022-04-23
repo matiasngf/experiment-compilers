@@ -5,18 +5,11 @@ import { generateAppCode } from "./getAppCode";
 import { GenerateMode } from "./handleGenerateAsync";
 import nodeExternals from "webpack-node-externals";
 
-import { ProvidePlugin } from 'webpack';
-
 export const generateWebackConfig = (pathList: string[], mode: GenerateMode, outputPath: string) => {
   // create virtual-modules
   const appCode = generateAppCode(pathList);
   const virtualModules = new VirtualModulesPlugin({
     './virtual-index.js': appCode,
-  });
-
-  const provide = new ProvidePlugin({
-    // 'express': 'express',
-    // 'dotenv': 'dotenv',
   });
 
   // run webpack
@@ -40,8 +33,7 @@ export const generateWebackConfig = (pathList: string[], mode: GenerateMode, out
     },
     entry: './virtual-index.js',
     plugins: [
-      virtualModules,
-      provide
+      virtualModules
     ]
   };
   return config;

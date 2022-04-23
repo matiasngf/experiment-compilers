@@ -4,6 +4,8 @@ const nodeExternals = require("webpack-node-externals");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+const { ProvidePlugin } = require("webpack");
+
 const webpack = require('webpack');
 
 const config = {
@@ -12,7 +14,7 @@ const config = {
   externalsPresets: { node: true },
   externals: [nodeExternals({
     allowlist: (modulePath) => {
-      return !(["webpack", "webpack-virtual-modules", "webpack-node-externals"].includes(modulePath));
+      return !(["webpack", "webpack-virtual-modules", "webpack-node-externals", "handlebars"].includes(modulePath));
     }
   })],
   output: {
@@ -27,6 +29,13 @@ const config = {
         test: /\.(jsx?)|(tsx?)$/,
         exclude: /(node_modules|bower_components)/,
         use: ["babel-loader", "ts-loader"]
+      },
+      {
+        test: /\.generator$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: path.resolve('code-as-string-loader.js'),
+        }
       },
     ]
   },
@@ -46,6 +55,9 @@ const config = {
       cleanStaleWebpackAssets: false,
       cleanOnceBeforeBuildPatterns: [path.resolve(__dirname, "./dist")],
     }),
+    new ProvidePlugin({
+      "Handlebars": "handlebars",
+    })
   ]
 }
 
