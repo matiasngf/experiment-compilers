@@ -18,7 +18,8 @@ const config = {
         "webpack",
         "webpack-virtual-modules",
         "webpack-node-externals",
-        "handlebars"
+        "handlebars",
+        "express"
       ].includes(modulePath));
     }
   })],
