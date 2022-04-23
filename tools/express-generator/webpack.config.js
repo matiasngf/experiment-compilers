@@ -14,7 +14,12 @@ const config = {
   externalsPresets: { node: true },
   externals: [nodeExternals({
     allowlist: (modulePath) => {
-      return !(["webpack", "webpack-virtual-modules", "webpack-node-externals", "handlebars"].includes(modulePath));
+      return !([
+        "webpack",
+        "webpack-virtual-modules",
+        "webpack-node-externals",
+        "handlebars"
+      ].includes(modulePath));
     }
   })],
   output: {
@@ -31,10 +36,10 @@ const config = {
         use: ["babel-loader", "ts-loader"]
       },
       {
-        test: /\.generator$/,
+        test: /\.hbs$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: path.resolve('code-as-string-loader.js'),
+          loader: path.resolve('handlebars-loader.js'),
         }
       },
     ]

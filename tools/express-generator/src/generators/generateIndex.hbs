@@ -1,0 +1,33 @@
+import express from 'express';
+import { config } from 'dotenv';
+
+import projectRoutes from './project-routes.js';
+
+const app = express();
+
+config();
+const port = process.env.PORT || 3000;
+
+const router = express.Router();
+
+Object.entries(projectRoutes).forEach(([route, handlers]) => {
+  console.log(route);
+  if(typeof handlers.GET === 'function') {
+    router.get(route, handlers.GET);
+  }
+  if(typeof handlers.POST === 'function') {
+    router.post(route, handlers.POST);
+  }
+  if(typeof handlers.PUT === 'function') {
+    router.put(route, handlers.PUT);
+  }
+  if(typeof handlers.DELETE === 'function') {
+    router.delete(route, handlers.DELETE);
+  }
+});
+
+app.use(router);
+
+app.listen(port, () => {
+  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+});

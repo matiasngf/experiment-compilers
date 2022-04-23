@@ -19,7 +19,6 @@ export const compile = () => {
   })
   .on('ready', () => {
     watcher.close();
-    console.log(pathList);
     console.log(`${chalk.bgYellow('express-gen')} build started.`);
     handleGenerateAsync(pathList, 'production').then(() => {
       console.log(`${chalk.bgYellow('express-gen')} build completed.`);

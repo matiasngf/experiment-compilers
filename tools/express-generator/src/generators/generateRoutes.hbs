@@ -1,0 +1,7 @@
+const routes = {
+  {{#each routes}}
+    "/{{this.routeUrl}}": require("../{{this.importPath}}"),
+  {{/each}}
+}
+
+export default routes;

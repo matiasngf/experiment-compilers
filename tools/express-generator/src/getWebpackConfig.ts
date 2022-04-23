@@ -9,7 +9,8 @@ export const generateWebackConfig = (pathList: string[], mode: GenerateMode, out
   // create virtual-modules
   const appCode = generateAppCode(pathList);
   const virtualModules = new VirtualModulesPlugin({
-    './virtual-index.js': appCode,
+    './.virtual/index.js': appCode.index,
+    './.virtual/project-routes.js': appCode.routes
   });
 
   // run webpack
@@ -31,7 +32,7 @@ export const generateWebackConfig = (pathList: string[], mode: GenerateMode, out
       path: path.resolve('./dist'),
       filename: 'index.js',
     },
-    entry: './virtual-index.js',
+    entry: './.virtual/index.js',
     plugins: [
       virtualModules
     ]

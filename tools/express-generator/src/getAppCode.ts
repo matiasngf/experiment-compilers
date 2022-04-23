@@ -1,25 +1,18 @@
-import virtualIndex from './server/virtual-index.generator';
+import generateIndex from './generators/generateIndex.hbs';
+import generateRouter from './generators/generateRoutes.hbs';
 
 export const generateAppCode = (pathList: string[] ) => {
-  console.log(virtualIndex());
-  
-  return virtualIndex();
-  return `
-    import express from 'express';
-    import { config } from 'dotenv';
-
-    const app = express();
-
-    config();
-    const port = process.env.PORT || 3000;
-
-    app.get('/', (req, res) => {
-      res.send('Hello World!')
+  const routes = [];
+  pathList.forEach(path => {
+    const routeUrl = path.replaceAll(/\\/g, '/');
+    const importPath = path.replaceAll(/\\/g, '/');
+    routes.push({
+      routeUrl,
+      importPath
     })
-    app.get('/routes', (req, res) => {
-      res.send(JSON.stringify('${JSON.stringify(pathList)}'))
-    })
-    app.listen(port, () => {
-      console.log(\`⚡️[server]: Server is running at http://localhost:\${port}\`);
-    });`;
+  })
+  return {
+    index: generateIndex(),
+    routes: generateRouter({routes})
+  }
 }
