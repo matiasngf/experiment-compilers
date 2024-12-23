@@ -1,5 +1,8 @@
 {
   "files.associations": {
     "*.generator": "javascript"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   }
 }

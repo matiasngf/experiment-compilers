@@ -28,6 +28,7 @@
   },
   "include": [
     "src/index.tsx",
+    "types/index.d.ts"
   ],
   "exclude": [
     "node_modules"

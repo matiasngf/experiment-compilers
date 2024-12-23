@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ReactReconciler from 'react-reconciler'
 import { HostConfig } from './types'
 
@@ -12,7 +13,7 @@ const hostConfig: HostConfig = {
   getRootHostContext: () => ({}),
   getChildHostContext: () => ({}),
   prepareForCommit: () => null,
-  resetAfterCommit: () => { },
+  resetAfterCommit: () => {},
 
   createInstance(type: string, props: any): Instance {
     return { type, props, children: [] }
@@ -32,13 +33,7 @@ const hostConfig: HostConfig = {
     return true
   },
 
-  commitUpdate(
-    instance: Instance,
-    updatePayload: any,
-    type: string,
-    oldProps: any,
-    newProps: any
-  ) {
+  commitUpdate(instance: Instance, updatePayload: any, type: string, oldProps: any, newProps: any) {
     instance.props = newProps
   },
 
@@ -50,9 +45,9 @@ const hostConfig: HostConfig = {
     container.children.push(child)
   },
 
-  removeChild() { },
-  removeChildFromContainer() { },
-  commitTextUpdate() { },
+  removeChild() {},
+  removeChildFromContainer() {},
+  commitTextUpdate() {},
   clearContainer(container: Instance) {
     container.children = []
   },
@@ -66,13 +61,14 @@ const hostConfig: HostConfig = {
   scheduleTimeout: setTimeout,
   cancelTimeout: clearTimeout,
   noTimeout: -1,
-  scheduleMicrotask: typeof queueMicrotask === 'function'
-    ? queueMicrotask
-    : typeof Promise !== 'undefined'
-      ? (callback: () => void) => Promise.resolve(null).then(callback).catch(console.error)
-      : setTimeout,
+  scheduleMicrotask:
+    typeof queueMicrotask === 'function'
+      ? queueMicrotask
+      : typeof Promise !== 'undefined'
+        ? (callback: () => void) => Promise.resolve(null).then(callback).catch(console.error)
+        : setTimeout
 }
 
 const Renderer = ReactReconciler(hostConfig as any)
 
-export default Renderer 
+export default Renderer

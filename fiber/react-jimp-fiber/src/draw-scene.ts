@@ -5,7 +5,7 @@ export type OutputPath = `${string}.${string}`
 
 type JimpImage = Awaited<ReturnType<typeof Jimp.read>>
 
-export const drawScene = async (elements: any[], outputPath: OutputPath) => {
+export const drawScene = async (elements: React.JSX.Element[], outputPath: OutputPath) => {
   // Create a new hsl(0, 0%, 0%) background image
   const background = new Jimp({
     width: 1920,
@@ -30,7 +30,11 @@ interface Transforms {
   scale?: number
 }
 
-const applyTransforms = async (element: React.JSX.Element, targetImage: JimpImage, parentTransforms: Transforms = {}) => {
+const applyTransforms = async (
+  element: React.JSX.Element,
+  targetImage: JimpImage,
+  parentTransforms: Transforms = {}
+) => {
   const { x = 0, y = 0, rotation = 0, scale = 1 } = element.props || {}
 
   const finalX = (parentTransforms.x || 0) + x
@@ -38,7 +42,7 @@ const applyTransforms = async (element: React.JSX.Element, targetImage: JimpImag
   const finalScale = (parentTransforms.scale || 1) * scale
   const finalRotation = (parentTransforms.rotation || 0) + rotation
 
-  if (element.type === 'image') {
+  if (element.type === 'jimpFigure') {
     try {
       // Load the image
       const sourceImage = await Jimp.read(path.join('./src/assets', element.props.src))
@@ -53,9 +57,9 @@ const applyTransforms = async (element: React.JSX.Element, targetImage: JimpImag
 
       targetImage.composite(sourceImage, finalX, finalY)
     } catch (error) {
-      console.error("Error reading image", element.props.src);
-      console.log("ERROR DETAILS:\n----------------");
-      console.log(error);
+      console.error('Error reading image', element.props.src)
+      console.log('ERROR DETAILS:\n----------------')
+      console.log(error)
     }
 
     // Composite the image onto the target
@@ -63,6 +67,7 @@ const applyTransforms = async (element: React.JSX.Element, targetImage: JimpImag
   } else if (element.type === 'group') {
     if (!('children' in element)) return
     // Process all children with updated transforms
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     for (const child of (element as any).children || []) {
       await applyTransforms(child, targetImage, {
         x: finalX,
