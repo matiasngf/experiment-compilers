@@ -1,0 +1,24 @@
+{
+  "name": "react-jimp-fiber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jimp": "^1.6.0",
+    "react": "^18.3.1",
+    "react-reconciler": "^0.29.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.18",
+    "react-reconciler": "^0.29.0",
+    "typescript": "^5.7.2"
+  }
+}
