@@ -1,11 +1,18 @@
-import path from 'path'
+import path, { dirname } from 'path'
 import { Jimp } from 'jimp'
+import { mkdir } from 'fs/promises'
+
+async function createFolder(path: string) {
+  const dir = dirname(path)
+  await mkdir(dir, { recursive: true })
+}
 
 export type OutputPath = `${string}.${string}`
 
 type JimpImage = Awaited<ReturnType<typeof Jimp.read>>
 
 export const drawScene = async (elements: React.JSX.Element[], outputPath: OutputPath) => {
+  await createFolder(outputPath)
   // Create a new hsl(0, 0%, 0%) background image
   const background = new Jimp({
     width: 1920,
