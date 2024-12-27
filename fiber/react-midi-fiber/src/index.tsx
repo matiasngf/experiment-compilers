@@ -1,64 +1,105 @@
+import { Fragment } from 'react/jsx-runtime'
 import { render } from './render'
 import fs from 'fs'
+import { mkdir } from 'fs/promises'
+import { dirname } from 'path'
 
-const App = () => (
-  <>
-    {/* Drums - Track 1 (Channel 10 is typically for drums in MIDI) */}
-    <midiTrack instrument={10}>
-      {/* Basic four-on-the-floor beat */}
-      {Array(16)
-        .fill(null)
-        .map((_, i) => (
-          <>
-            <midiNote pitch={['C2']} duration={4} velocity={i % 4 === 0 ? 100 : 80} /> {/* Kick */}
-            {i % 2 === 1 && <midiNote pitch={['F#2']} duration={4} velocity={90} />} {/* Hi-hat */}
-            {i % 4 === 2 && <midiNote pitch={['D2']} duration={4} velocity={85} />} {/* Snare */}
-          </>
-        ))}
-    </midiTrack>
+// Melody patterns
+function MainTheme() {
+  return (
+    <>
+      {/* Main motif */}
+      <midiNote pitch={['C5']} duration={4} velocity={100} />
+      <midiNote pitch={['E5']} duration={4} velocity={100} />
+      <midiNote pitch={['G5']} duration={4} velocity={100} />
+      <midiNote pitch={['C6']} duration={8} velocity={100} />
 
-    {/* Bass Synth - Track 2 */}
-    <midiTrack instrument={38}>
-      {/* Synth Bass */}
-      {/* Bass line pattern */}
-      <midiNote pitch={['C2']} duration={8} />
-      <midiNote pitch={['C2']} duration={8} />
-      <midiNote pitch={['G2']} duration={8} />
-      <midiNote pitch={['E2']} duration={8} />
-      {/* Repeat pattern */}
-      <midiNote pitch={['F2']} duration={8} />
-      <midiNote pitch={['F2']} duration={8} />
-      <midiNote pitch={['C2']} duration={8} />
-      <midiNote pitch={['G2']} duration={8} />
-    </midiTrack>
+      {/* Response */}
+      <midiNote pitch={['B5']} duration={4} velocity={90} />
+      <midiNote pitch={['G5']} duration={4} velocity={90} />
+      <midiNote pitch={['E5']} duration={8} velocity={90} />
+    </>
+  )
+}
 
-    {/* Lead Synth - Track 3 */}
-    <midiTrack instrument={81}>
+// Bass pattern with a space-y feel
+function BassPattern() {
+  return (
+    <>
+      <midiNote pitch={['C2']} duration={8} velocity={85} />
+      <midiNote pitch={['G2']} duration={8} velocity={75} />
+      <midiNote pitch={['C3']} duration={8} velocity={70} />
+      <midiNote pitch={['G2']} duration={8} velocity={75} />
+    </>
+  )
+}
+
+// Arpeggiated background pattern
+function SpaceArpeggio() {
+  const arpeggioNotes = [
+    { pitch: ['C4', 'E4'], duration: 16 },
+    { pitch: ['E4', 'G4'], duration: 16 },
+    { pitch: ['G4', 'C5'], duration: 16 },
+    { pitch: ['E4', 'G4'], duration: 16 }
+  ]
+
+  return (
+    <>
+      {arpeggioNotes.map((note, i) => (
+        <midiNote key={i} pitch={note.pitch} duration={note.duration} velocity={60} />
+      ))}
+    </>
+  )
+}
+
+function SpaceAdventure() {
+  return (
+    <>
       {/* Lead Synth */}
-      {/* Main melody */}
-      <midiNote pitch={['C4', 'E4']} duration={4} />
-      <midiNote pitch={['G4']} duration={8} />
-      <midiNote pitch={['F4']} duration={8} />
-      <midiNote pitch={['E4']} duration={4} />
-      <midiNote pitch={['C4']} duration={4} />
-      <midiNote pitch={['D4', 'F4']} duration={4} />
-      <midiNote pitch={['E4']} duration={8} />
-      <midiNote pitch={['G4']} duration={8} />
-    </midiTrack>
+      <midiTrack instrument={81}>
+        <MainTheme />
+        <MainTheme />
+      </midiTrack>
 
-    {/* Pad Synth - Track 4 */}
-    <midiTrack instrument={91}>
-      {/* Pad Synth */}
-      {/* Atmospheric pads */}
-      <midiNote pitch={['C3', 'E3', 'G3']} duration={16} velocity={60} />
-      <midiNote pitch={['F3', 'A3', 'C4']} duration={16} velocity={60} />
-    </midiTrack>
-  </>
-)
+      {/* Bass Track */}
+      <midiTrack instrument={38}>
+        {Array(4)
+          .fill(null)
+          .map((_, i) => (
+            <Fragment key={i}>
+              <BassPattern />
+            </Fragment>
+          ))}
+      </midiTrack>
 
-render(<App />, {
-  onComplete: writer => {
-    fs.writeFileSync('output.mid', writer.buildFile())
-    console.log('MIDI saved as output.mid')
+      {/* Arpeggiated Background */}
+      <midiTrack instrument={91}>
+        {Array(8)
+          .fill(null)
+          .map((_, i) => (
+            <Fragment key={i}>
+              <SpaceArpeggio />
+            </Fragment>
+          ))}
+      </midiTrack>
+    </>
+  )
+}
+
+render(<SpaceAdventure />, {
+  onComplete: async writer => {
+    await saveFile('./build/space-adventure.mid', writer.buildFile())
+    console.log('MIDI saved as space-adventure.mid')
   }
 })
+
+// utils
+async function saveFile(path: string, data: Uint8Array) {
+  await createFolder(path)
+  fs.writeFileSync(path, data)
+}
+
+async function createFolder(path: string) {
+  const dir = dirname(path)
+  await mkdir(dir, { recursive: true })
+}
