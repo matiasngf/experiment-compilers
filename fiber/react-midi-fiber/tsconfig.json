@@ -23,11 +23,6 @@
     "declaration": true,
     "declarationDir": "./dist",
     "outDir": "./dist",
-    "paths": {
-      "*": [
-        "src/*"
-      ]
-    }
   },
   "include": [
     "src"
