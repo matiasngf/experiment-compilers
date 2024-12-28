@@ -34,7 +34,13 @@ const hostConfig: HostConfig = {
     return true
   },
 
-  commitUpdate(instance: Instance, updatePayload: any, type: string, oldProps: any, newProps: any) {
+  commitUpdate(
+    instance: Instance,
+    _updatePayload: any,
+    _type: string,
+    _oldProps: any,
+    newProps: any
+  ) {
     instance.props = newProps
   },
 

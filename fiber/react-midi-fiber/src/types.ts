@@ -34,3 +34,30 @@ export interface HostConfig {
   noTimeout: number
   scheduleMicrotask: (callback: () => void) => void
 }
+
+// react declaration
+
+export interface MidiTrackProps {
+  key?: any
+  instrument?: number
+  children: React.ReactNode
+}
+
+export interface MidiNoteProps {
+  pitch: string | string[]
+  key?: any
+  velocity?: number
+  duration: number
+}
+
+interface MidiElements {
+  midiTrack: MidiTrackProps
+  midiNote: MidiNoteProps
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements extends MidiElements {}
+  }
+}

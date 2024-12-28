@@ -2,7 +2,7 @@
 import Renderer from './renderer'
 import MidiWriter from 'midi-writer-js'
 import type { Writer } from 'midi-writer-js/build/types/writer'
-import type { MidiTrackProps, MidiNoteProps } from '../types'
+import type { MidiTrackProps, MidiNoteProps } from './types'
 
 import type { Track } from 'midi-writer-js/build/types/chunks/track'
 

@@ -1,25 +1,28 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2020",
-    "module": "CommonJS",
+    "useDefineForClassFields": true,
     "lib": [
-      "ES2020"
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
     ],
-    "jsx": "react-jsx",
-    "strict": true,
-    "esModuleInterop": true,
+    "module": "ESNext",
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "declaration": true,
+    "declarationDir": "./dist",
     "outDir": "./dist",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types"
-    ],
-    "baseUrl": ".",
     "paths": {
       "*": [
         "src/*"
@@ -27,10 +30,11 @@
     }
   },
   "include": [
-    "src/index.tsx",
-    "types/index.d.ts"
+    "src"
   ],
-  "exclude": [
-    "node_modules"
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }
