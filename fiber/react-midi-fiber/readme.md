@@ -1,49 +1,52 @@
-# react-jimp-fiber
+# react-midi-fiber
 
-*A React renderer for jimp.*
+*A React renderer for midi files.*
 
 The objetive of this experiment is to learn how to use fiber to create a custom renderer for react.
 
 ## Usage
 
 ```tsx
-import { render } from 'react-jimp-fiber'
+import { render } from 'react-midi-fiber'
 
 const App = () => (
   <>
-    <jimpFigure src="background.jpg" x={0} y={0} scale={4} />
-    <group>
-      <jimpFigure src="asteroid.png" x={50} y={50} scale={0.5} />
-    </group>
-    <jimpFigure src="spaceship.png" x={200} y={600} scale={0.8} rotation={15} />
+    <midiTrack instrument={81}>
+      <midiNote pitch={['C5']} duration={4} velocity={100} />
+      <midiNote pitch={['E5']} duration={4} velocity={100} />
+      <midiNote pitch={['G5']} duration={4} velocity={100} />
+      <midiNote pitch={['C6']} duration={8} velocity={100} />
+    </midiTrack>
   </>
 )
 
-render(<App />, './build/output_scene.png')
+render(<App />, {
+  onComplete: writer => {
+    // get data
+    const midiData = writer.buildFile()
+
+    // save file or play it
+    fs.writeFileSync(path.join(__dirname, 'output.mid'), midiData)
+  }
+})
 ```
 
 ## Components
 
-### jimpFigure
+### midiTrack
 
-Renders an image using jimp. The asset of the image will be loaded from the `src/assets` folder.
-
-### props
-
-- `src`: The path to the image file.
-- `x`: The x position of the image.
-- `y`: The y position of the image.
-- `scale`: The scale of the image.
-- `rotation`: The rotation of the image.
-
-### group
-
-Groups are usefull to apply transformations to multiple jimpFigures.
+Renders a midi track.
 
 ### props
 
-- `x`: The x position of the group.
-- `y`: The y position of the group.
-- `rotation`: The rotation of the group.
-- `scale`: The scale of the group.
-- `children`: The children of the group.
+- `instrument`: The instrument to use for the track.
+
+### midiNote
+
+Renders a midi note.
+
+### props
+
+- `pitch`: The pitch of the note.
+- `duration`: The duration of the note.
+- `velocity`: The velocity of the note.
