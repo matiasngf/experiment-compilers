@@ -21,8 +21,6 @@ function Player() {
   useEffect(() => {
     render(<SpaceAdventure />, {
       onComplete: writer => {
-        console.log(writer)
-
         // parse midi
         const midiData = writer.buildFile()
         const parsedMidi = new Midi(midiData)
