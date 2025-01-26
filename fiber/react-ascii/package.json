@@ -1,5 +1,5 @@
 {
-  "name": "react-midi-fiber",
+  "name": "react-ascii",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -16,7 +16,7 @@
     }
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --mode development --watch",
     "build": "tsc && vite build",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
@@ -27,15 +27,17 @@
   "author": "matiasngf",
   "license": "ISC",
   "dependencies": {
-    "@tonejs/midi": "^2.0.28",
+    "chalk": "^5.4.1",
     "jimp": "^1.6.0",
-    "midi-writer-js": "^3.1.1",
-    "react": "^18.3.1",
-    "react-reconciler": "^0.29.0"
+    "react-reconciler": "^0.29.0",
+    "rollup-plugin-node-externals": "^8.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "13.0.6",
     "@types/node": "^22.10.2",
-    "@types/react": "^18.3.18",
+    "@types/react": "^18.2.0",
+    "@types/react-reconciler": "^0.28.9",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "eslint": "^8.54.0",
@@ -45,8 +47,13 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.1.0",
+    "react": "^18.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "^5.7.2",
     "vite": "^5.1.4",
     "vite-plugin-dts": "^3.7.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
   }
 }
