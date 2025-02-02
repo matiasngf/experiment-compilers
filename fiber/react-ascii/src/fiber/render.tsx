@@ -6,17 +6,16 @@ import type React from 'react'
 // import instances from './instances'
 import { FiberRoot } from 'react-reconciler'
 import { startRafRunner } from '@/core/raf'
-// import { ConcurrentRoot } from 'react-reconciler/constants'
+import type { RendererOptions } from '@/core/renderer'
 
-// TODO add a ton of logs to understand what's happening
 const reconciler = createRenderer()
 
 const instances = {} as any
 
 const instanceKey = 'main'
 
-export function render(element: React.ReactNode) {
-  const containerObject = new Renderer()
+export function render(element: React.ReactNode, options: RendererOptions = {}) {
+  const containerObject = new Renderer(options)
 
   let root: FiberRoot = instances[instanceKey] as FiberRoot
 
@@ -39,7 +38,7 @@ export function render(element: React.ReactNode) {
   })
   // reconciler.injectIntoDevTools({
   //   bundleType: 0,
-  //   // Reporting React DOM's version, not Ink's
+  //   // Reporting React DOM's version
   //   // See https://github.com/facebook/react/issues/16666#issuecomment-532639905
   //   version: '0.0.1',
   //   rendererPackageName: 'react-ascii'
@@ -47,7 +46,7 @@ export function render(element: React.ReactNode) {
   startRafRunner(() => {
     // Render ascii to the console
     const ascii = containerObject.render()
-    console.clear()
+    process.stdout.write('\x1Bc')
     console.log(ascii)
     containerObject.clear()
   })
