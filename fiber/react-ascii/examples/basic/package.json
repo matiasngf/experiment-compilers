@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "scripts": {
     "build": "webpack",
+    "start": "node dist/bundle.js",
     "build-start": "webpack && node dist/bundle.js",
-    "dev": "tsx src/index.ts"
+    "dev": "NODE_ENV=development webpack --watch"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-ascii": "../../",
+    "react": "^18.3.1",
+    "react-ascii": "workspace:*",
     "tsx": "^4.19.2"
   },
   "devDependencies": {

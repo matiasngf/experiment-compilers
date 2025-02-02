@@ -1,0 +1,3 @@
+packages:
+  - 'fiber/*'
+  - 'fiber/react-ascii/examples/*'

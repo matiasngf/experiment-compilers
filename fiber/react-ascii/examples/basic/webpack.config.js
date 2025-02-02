@@ -4,10 +4,20 @@ const webpack = require('webpack');
 
 const isProduction = process.env.NODE_ENV == "production";
 
+const plugins = []
+
+if (isProduction) {
+  plugins.push(new ForkTsCheckerWebpackPlugin())
+}
+
+plugins.push(new webpack.ProvidePlugin({
+  React: 'react'
+}))
+
 module.exports = {
   mode: isProduction ? "production" : "development",
   devtool: "source-map",
-  entry: path.join(__dirname, "src", "index.ts"),
+  entry: path.join(__dirname, "src", "index.tsx"),
   output: {
     path: path.join(__dirname, "dist"),
     filename: "bundle.js"
@@ -32,12 +42,10 @@ module.exports = {
     fallback: {
       fs: false
     },
+    // alias: {
+    //   'React': require.resolve('react'),
+    // }
 
   },
-  plugins: [
-    // new ForkTsCheckerWebpackPlugin({}),
-    // new webpack.ProvidePlugin({
-    //   React: 'react'
-    // })
-  ]
+  plugins
 }

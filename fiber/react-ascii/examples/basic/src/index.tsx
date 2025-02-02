@@ -2,4 +2,4 @@ import { render } from 'react-ascii'
 
 import { App } from './app'
 
-render(App())
+render((<App />) as any)

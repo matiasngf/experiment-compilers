@@ -1,6 +1,7 @@
 {
   "name": "react-ascii",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -8,13 +9,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "scripts": {
     "dev": "vite build --mode development --watch",
     "build": "tsc && vite build",
@@ -29,14 +23,23 @@
   "dependencies": {
     "chalk": "^5.4.1",
     "jimp": "^1.6.0",
-    "react-reconciler": "^0.29.0",
+    "react-devtools-core": "^6.1.0",
+    "react-reconciler": "^0.27.0",
     "rollup-plugin-node-externals": "^8.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/plugin-transform-flow-strip-types": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/register": "^7.12.10",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "13.0.6",
     "@types/node": "^22.10.2",
-    "@types/react": "^18.2.0",
+    "@types/react": "^19.0.8",
     "@types/react-reconciler": "^0.28.9",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
@@ -47,7 +50,8 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.1.0",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "^5.7.2",
     "vite": "^5.1.4",

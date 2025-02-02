@@ -7,7 +7,7 @@
     "start": "tsx src/index.ts"
   },
   "dependencies": {
-    "react-ascii": "../../"
+    "react-ascii": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",
