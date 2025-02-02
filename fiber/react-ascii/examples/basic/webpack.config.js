@@ -42,9 +42,6 @@ module.exports = {
     fallback: {
       fs: false
     },
-    // alias: {
-    //   'React': require.resolve('react'),
-    // }
 
   },
   plugins
