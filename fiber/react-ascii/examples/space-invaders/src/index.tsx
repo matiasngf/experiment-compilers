@@ -1,5 +1,5 @@
 import { render } from 'react-ascii'
 
 import { App } from './app'
-
-render(<App />, { width: 60, height: 50 })
+import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants'
+render(<App />, { width: CANVAS_WIDTH, height: CANVAS_HEIGHT })

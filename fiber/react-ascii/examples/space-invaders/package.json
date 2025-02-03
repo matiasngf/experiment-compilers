@@ -7,7 +7,7 @@
     "start": "node dist/bundle.js",
     "build-start": "webpack && node dist/bundle.js",
     "build:watch": "cross-env NODE_ENV=development webpack --watch",
-    "start:watch": "nodemon --quiet --watch dist/bundle.js dist/bundle.js",
+    "start:watch": "nodemon --quiet --watch dist/bundle.js --no-stdin dist/bundle.js",
     "dev": "concurrently --raw --hide 0 \"npm run build:watch\" \"npm run start:watch\""
   },
   "dependencies": {

@@ -1,30 +1,64 @@
-// import fs from 'fs'
-import { useEffect, useState } from 'react'
+import alienIamge from './assets/alien-smol.png'
+import playerImage from './assets/player.png'
+import { useInput } from 'react-ascii'
 
-import imageData from './assets/alien-smol.png'
+import {
+  ENEMY_COUNT_X,
+  ENEMY_COUNT_Y,
+  ENEMY_HEIGHT,
+  ENEMY_WIDTH,
+  ENEMY_SPACING_X,
+  ENEMY_SPACING_Y,
+  CANVAS_PADDING_X,
+  CANVAS_PADDING_Y,
+  CANVAS_HEIGHT,
+  PLAYER_HEIGHT,
+  CANVAS_WIDTH,
+  PLAYER_WIDTH
+} from './constants'
+import { useState } from 'react'
 
 export function App() {
-  return <Character />
+  return (
+    <>
+      {Array.from({ length: ENEMY_COUNT_Y }, (_, row) =>
+        Array.from({ length: ENEMY_COUNT_X }, (_, col) => (
+          <Alien
+            key={`alien-${row}-${col}`}
+            x={col * (ENEMY_WIDTH + ENEMY_SPACING_X) + CANVAS_PADDING_X}
+            y={row * (ENEMY_HEIGHT + ENEMY_SPACING_Y) + CANVAS_PADDING_Y}
+          />
+        ))
+      )}
+      <Player />
+    </>
+  )
 }
 
-const limitMax = 10
-const limitMin = 2
+function Alien({ x, y }: { x: number; y: number }) {
+  return <asciiImage src={alienIamge} position={{ x: x, y: y }} />
+}
 
-function Character() {
-  const [x, setX] = useState(0)
-  const y = 0
+function Player() {
+  const [position, setPosition] = useState({
+    x: CANVAS_WIDTH / 2 - PLAYER_WIDTH / 2,
+    y: CANVAS_HEIGHT - PLAYER_HEIGHT - 2
+  })
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setX(x => x + 2)
-    }, 200)
+  const MOVE_SPEED = 2
 
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
+  useInput(event => {
+    if (event.name === 'left')
+      setPosition(pos => ({
+        ...pos,
+        x: Math.max(CANVAS_PADDING_X, pos.x - MOVE_SPEED)
+      }))
+    else if (event.name === 'right')
+      setPosition(pos => ({
+        ...pos,
+        x: Math.min(CANVAS_WIDTH - PLAYER_WIDTH - CANVAS_PADDING_X, pos.x + MOVE_SPEED)
+      }))
+  })
 
-  const realX = (x % (limitMax + limitMin)) - limitMin
-
-  return <asciiImage src={imageData} position={{ x: realX, y }} />
+  return <asciiImage src={playerImage} position={position} />
 }
