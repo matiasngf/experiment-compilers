@@ -3,21 +3,29 @@ import type Reconciler from 'react-reconciler'
 import type { HostConfig } from 'react-reconciler'
 import type { Image } from '@/core/image'
 import type { Renderer } from '@/core/renderer'
+import { Color } from '@/core/color'
 
 export type Root = { fiber: Reconciler.FiberRoot }
 
-// export type InstanceType = 'asciiImage'
+export interface Vec2 {
+  x: number
+  y: number
+}
 
 export enum InstanceType {
-  AsciiImage = 'asciiImage'
+  AsciiImage = 'asciiImage',
+  AsciiColor = 'asciiColor'
 }
 
 export interface ImageProps {
   src: string | Buffer
-  position: {
-    x: number
-    y: number
-  }
+  position: Vec2
+}
+
+export type ColorProps = {
+  color: string
+  position: Vec2
+  size: Vec2
 }
 
 export interface RendererProps {
@@ -25,9 +33,9 @@ export interface RendererProps {
   height: number
 }
 
-export type InstanceProps = ImageProps
+export type InstanceProps = ImageProps | ColorProps
 
-export type Instance = Image
+export type Instance = Image | Color
 
 export interface ReconcilierArgs {
   type: InstanceType
@@ -81,6 +89,7 @@ export type ReconcilerConfig = HostConfig<
 /** Type the global elements */
 export interface AsciiElements {
   asciiImage: ImageProps
+  asciiColor: ColorProps
 }
 
 declare global {

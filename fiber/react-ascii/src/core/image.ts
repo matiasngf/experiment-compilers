@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { Vec2 } from '@/fiber/types'
 import { Jimp } from 'jimp'
-
-interface Vec2 {
-  x: number
-  y: number
-}
 
 export type JimpImage = Awaited<ReturnType<typeof Jimp.read>>
 

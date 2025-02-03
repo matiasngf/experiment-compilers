@@ -1,6 +1,7 @@
 import { intToRGBA, Jimp } from 'jimp'
 import { Image, JimpImage } from './image'
 import { Chalk } from 'chalk'
+import { Color } from './color'
 import { subscribable } from './utils/subscribable'
 
 const ch = new Chalk({
@@ -11,6 +12,8 @@ const LOWER_BLOCK_CHAR = '▄'
 
 export type RenderFrameCallback = (renderer: Renderer, delta: number) => void
 
+type RendererChild = Image | Color
+
 export interface RendererOptions {
   clearColor?: number
   width?: number
@@ -18,7 +21,7 @@ export interface RendererOptions {
 }
 
 export class Renderer {
-  public children: Image[] = []
+  public children: RendererChild[] = []
 
   public buffer: JimpImage
 
@@ -76,11 +79,11 @@ export class Renderer {
     )
   }
 
-  public addChild(child: Image) {
+  public addChild(child: RendererChild) {
     this.children.push(child)
   }
 
-  public removeChild(child: Image) {
+  public removeChild(child: RendererChild) {
     this.children = this.children.filter(c => c !== child)
   }
 
