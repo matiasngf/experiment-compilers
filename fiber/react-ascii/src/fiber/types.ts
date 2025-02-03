@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Reconciler from 'react-reconciler'
-import { Image } from '@/core/image'
-import { Renderer } from '@/core/renderer'
+import type Reconciler from 'react-reconciler'
+import type { HostConfig } from 'react-reconciler'
+import type { Image } from '@/core/image'
+import type { Renderer } from '@/core/renderer'
 
 export type Root = { fiber: Reconciler.FiberRoot }
 
@@ -28,23 +29,57 @@ export type InstanceProps = ImageProps
 
 export type Instance = Image
 
-export interface HostConfig {
-  container: Renderer
-  updatePayload: any
+export interface ReconcilierArgs {
   type: InstanceType
   props: InstanceProps
+  container: Renderer
   instance: Instance
-  textInstance: void
-  suspenseInstance: Instance
-  hydratableInstance: Instance
+  textInstance: never
+  suspenseInstance: never
+  hydratableInstance: never
   publicInstance: Instance
-  hostContext: Record<string, never>
+  hostContext: never
+  updatePayload: any
   childSet: never
   timeoutHandle: number | undefined
   noTimeout: -1
 }
 
-interface AsciiElements {
+export type AsciiReconciler = typeof Reconciler<
+  ReconcilierArgs['type'],
+  ReconcilierArgs['props'],
+  ReconcilierArgs['container'],
+  ReconcilierArgs['instance'],
+  ReconcilierArgs['textInstance'],
+  ReconcilierArgs['suspenseInstance'],
+  ReconcilierArgs['hydratableInstance'],
+  ReconcilierArgs['publicInstance'],
+  ReconcilierArgs['hostContext'],
+  ReconcilierArgs['updatePayload'],
+  ReconcilierArgs['childSet'],
+  ReconcilierArgs['timeoutHandle'],
+  ReconcilierArgs['noTimeout']
+>
+
+/** The types of the config object passed to the Reconciler */
+export type ReconcilerConfig = HostConfig<
+  ReconcilierArgs['type'],
+  ReconcilierArgs['props'],
+  ReconcilierArgs['container'],
+  ReconcilierArgs['instance'],
+  ReconcilierArgs['textInstance'],
+  ReconcilierArgs['suspenseInstance'],
+  ReconcilierArgs['hydratableInstance'],
+  ReconcilierArgs['publicInstance'],
+  ReconcilierArgs['hostContext'],
+  ReconcilierArgs['updatePayload'],
+  ReconcilierArgs['childSet'],
+  ReconcilierArgs['timeoutHandle'],
+  ReconcilierArgs['noTimeout']
+>
+
+/** Type the global elements */
+export interface AsciiElements {
   asciiImage: ImageProps
 }
 

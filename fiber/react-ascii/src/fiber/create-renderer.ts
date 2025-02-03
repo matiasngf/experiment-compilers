@@ -1,90 +1,103 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import ReactReconciler from 'react-reconciler'
-import { HostConfig, ImageProps, Instance, InstanceProps, InstanceType } from './types'
-import { Image } from '@/core/image'
+import { DefaultEventPriority } from 'react-reconciler/constants'
 
-function createInstance(type: InstanceType, props: InstanceProps): Instance {
-  if (type === InstanceType.AsciiImage) {
-    const imageProps = props as ImageProps
-    return new Image({
-      src: imageProps.src,
-      position: imageProps.position
-    })
-  }
-  throw new Error(`Unknown instance type: ${type}`)
-}
+import { AsciiReconciler } from './types'
+import { Image } from '@/core/image'
+import { createInstance, commitUpdate } from './instances'
 
 export function createRenderer() {
-  const reconciler = ReactReconciler<
-    HostConfig['type'],
-    HostConfig['props'],
-    HostConfig['container'],
-    HostConfig['instance'],
-    HostConfig['textInstance'],
-    HostConfig['suspenseInstance'],
-    HostConfig['hydratableInstance'],
-    HostConfig['publicInstance'],
-    HostConfig['hostContext'],
-    HostConfig['updatePayload'],
-    HostConfig['childSet'],
-    HostConfig['timeoutHandle'],
-    HostConfig['noTimeout']
-  >({
-    getRootHostContext: () => ({}),
-    getChildHostContext: () => ({}),
+  const reconciler = (ReactReconciler as AsciiReconciler)({
+    // --------- General config ---------
+    isPrimaryRenderer: true,
+    supportsMutation: true,
+    supportsHydration: false,
+    supportsPersistence: false, // 👀
+
+    // --------- Context and global state ---------
+    getRootHostContext: () => null,
+    getChildHostContext: parentHostContext => parentHostContext,
+
+    // --------- Instance operations ---------
+    createInstance,
+    commitUpdate,
+    getPublicInstance: instance => instance, // refs
+    removeChild(_parentInstance, _childInstance) {
+      /** For now, no instances can have children
+       * Furure implementation:
+       */
+      // if ('removeChild' in parent) {
+      //   _parentInstance.removeChild(_childInstance)
+      // } else {
+      //   throw new Error('Parent does not support removeChild')
+      // }
+    },
+    appendInitialChild(_parentInstance, _childInstance) {
+      return null
+      /** For now, no instances can have children
+       * Possible implementation:
+       */
+      // if ('addChild' in parent) {
+      //   _parentInstance.addChild(_childInstance)
+      // } else {
+      //   throw new Error('Parent does not support addChild')
+      // }
+    },
+    appendChild(_parentInstance, _childInstance) {
+      return null
+      /** For now, no instances can have children
+       * Possible implementation:
+       */
+      // if ('addChild' in _parentInstance) {
+      //   _parentInstance.addChild(_childInstance)
+      // } else {
+      //   throw new Error('Parent does not support addChild')
+      // }
+    },
+    prepareUpdate: (_instance, _type, _oldProps, _newProps, _rootContainer, _hostContext) => {
+      // optionally intercept props when changing
+      return true
+    },
     prepareForCommit: () => null,
     resetAfterCommit: () => {},
 
-    createInstance,
+    // --------- Container operations ---------
+    appendChildToContainer(rootContainer, childInstance) {
+      rootContainer.addChild(childInstance)
+    },
 
-    shouldSetTextContent: () => false,
-
-    clearContainer(container: any) {
-      container.children.forEach((child: any) => {
-        container.removeChild(child)
+    clearContainer(rootContainer) {
+      rootContainer.children.forEach(child => {
+        rootContainer.removeChild(child)
       })
     },
-
-    removeChildFromContainer(container: any, child: any) {
-      if (child instanceof Image) {
-        container.removeChild(child)
+    removeChildFromContainer(rootContainer, childInstance) {
+      if (childInstance instanceof Image) {
+        rootContainer.removeChild(childInstance)
       }
     },
+    detachDeletedInstance: () => {},
 
-    appendInitialChild(parent: any, child: any) {
-      if ('addChild' in parent && child instanceof Image) (parent as any).addChild(child)
+    // --------- Text instances ---------
+    createTextInstance: () => {
+      throw new Error('Text instances are not supported in ASCII mode')
     },
+    shouldSetTextContent: () => false,
 
-    appendChild(parent: any, child: any) {
-      if ('addChild' in parent) (parent as any).addChild(child)
-    },
+    // --------- Timeout ---------
+    scheduleTimeout: setTimeout,
+    cancelTimeout: clearTimeout,
+    noTimeout: -1,
 
-    appendChildToContainer(container: any, child: any) {
-      if (child instanceof Image) container.addChild(child)
-    },
-
-    prepareUpdate() {
-      return true
-    },
-
-    commitUpdate(instance: any, _updatePayload: any, _type: any, oldProps: any, newProps: any) {
-      if (instance instanceof Image) {
-        if (oldProps.src !== newProps.src) instance.src = newProps.src
-        if (
-          oldProps.position.x !== newProps.position.x ||
-          oldProps.position.y !== newProps.position.y
-        ) {
-          instance.position.x = newProps.position.x
-          instance.position.y = newProps.position.y
-        }
-      }
-    },
-
-    removeChild() {},
-
-    supportsMutation: true,
-    finalizeInitialChildren: () => false
-  } as any)
+    // --------- Other configs ---------
+    getInstanceFromNode: () => null,
+    finalizeInitialChildren: () => false,
+    getCurrentEventPriority: () => DefaultEventPriority,
+    beforeActiveInstanceBlur: () => {},
+    afterActiveInstanceBlur: () => {},
+    prepareScopeUpdate: () => {},
+    getInstanceFromScope: () => null,
+    preparePortalMount: () => {}
+  })
 
   return reconciler
 }

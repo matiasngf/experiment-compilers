@@ -1,12 +1,15 @@
 import { intToRGBA, Jimp } from 'jimp'
 import { Image, JimpImage } from './image'
 import { Chalk } from 'chalk'
+import { subscribable } from './utils/subscribable'
 
 const ch = new Chalk({
   level: 3
 })
 
 const LOWER_BLOCK_CHAR = '▄'
+
+export type RenderFrameCallback = (renderer: Renderer, delta: number) => void
 
 export interface RendererOptions {
   clearColor?: number
@@ -48,6 +51,19 @@ export class Renderer {
         this.buffer.composite(child.image, child.position.x, child.position.y)
       }
     }
+  }
+
+  private _onFrameCallbacks = subscribable<RenderFrameCallback>()
+
+  public onFrame(callback: RenderFrameCallback) {
+    return this._onFrameCallbacks.addCallback(callback)
+  }
+
+  /** Removes subscription to frame callback
+   * @param id - The id or callback function of the callback to remove
+   */
+  public removeFrameCallback(id: string | RenderFrameCallback) {
+    this._onFrameCallbacks.removeCallback(id)
   }
 
   public intToHex(color: number) {
@@ -93,11 +109,16 @@ export class Renderer {
     return ascii
   }
 
+  private _frameLastCalled = 0
+
   public render() {
+    const now = performance.now()
+    const delta = now - this._frameLastCalled
+    this._frameLastCalled = now
+    this._onFrameCallbacks.runCallbacks(this, delta)
+
     this.renderBuffer()
-
     const ascii = this.getAscii()
-
     return ascii
   }
 

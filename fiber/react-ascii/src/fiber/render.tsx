@@ -5,7 +5,7 @@ import { createRenderer } from './create-renderer'
 import type React from 'react'
 // import instances from './instances'
 import { FiberRoot } from 'react-reconciler'
-import { startRafRunner } from '@/core/raf'
+import { startRafRunner } from '@/core/utils/raf'
 import type { RendererOptions } from '@/core/renderer'
 
 const reconciler = createRenderer()

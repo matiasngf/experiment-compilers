@@ -69,11 +69,11 @@ export default defineConfig({
       formats: ['es', 'cjs']
     },
     rollupOptions: {
-      external: ['react', 'react-reconciler'],
+      external: ['react', 'node:buffer'],
       output: {
         globals: {
-          react: 'React',
-          'react-reconciler': 'ReactReconciler'
+          react: 'React'
+          // 'react-reconciler': 'ReactReconciler'
         }
       }
     }
