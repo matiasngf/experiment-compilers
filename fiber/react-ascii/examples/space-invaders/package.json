@@ -13,7 +13,8 @@
   "dependencies": {
     "gl-matrix": "^3.4.3",
     "react": "^18.3.1",
-    "react-ascii": "workspace:*"
+    "react-ascii": "workspace:*",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@swc/core": "^1.10.8",

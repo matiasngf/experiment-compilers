@@ -1,4 +1,4 @@
-export const PLAYER_WIDTH = 10
+export const PLAYER_WIDTH = 7
 export const PLAYER_HEIGHT = 5
 export const PLAYER_MARGIN_TOP = 15
 
@@ -20,4 +20,9 @@ export const CANVAS_PADDING_Y = 3
 export const CANVAS_WIDTH = ENEMIES_TOTAL_X + CANVAS_PADDING_X * 2
 export const CANVAS_HEIGHT = ENEMIES_TOTAL_Y + PLAYER_MARGIN_TOP + PLAYER_HEIGHT + CANVAS_PADDING_Y * 2
 
-
+export enum COLLIDERS {
+  PLAYER = 'player',
+  PLAYER_PROJECTILE = 'player-projectile',
+  ENEMY = 'enemy',
+  ENEMY_PROJECTILE = 'enemy-projectile'
+}
