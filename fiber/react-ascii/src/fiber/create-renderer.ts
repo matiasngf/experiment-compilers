@@ -2,7 +2,6 @@ import ReactReconciler from 'react-reconciler'
 import { DefaultEventPriority } from 'react-reconciler/constants'
 
 import { AsciiReconciler } from './types'
-import { Image } from '@/core/image'
 import { createInstance, commitUpdate } from './instances'
 
 export function createRenderer() {
@@ -21,6 +20,9 @@ export function createRenderer() {
     createInstance,
     commitUpdate,
     getPublicInstance: instance => instance, // refs
+    insertBefore: () => {
+      // Empty for now
+    },
     removeChild(_parentInstance, _childInstance) {
       /** For now, no instances can have children
        * Furure implementation:
@@ -71,11 +73,12 @@ export function createRenderer() {
       })
     },
     removeChildFromContainer(rootContainer, childInstance) {
-      if (childInstance instanceof Image) {
-        rootContainer.removeChild(childInstance)
-      }
+      rootContainer.removeChild(childInstance)
     },
     detachDeletedInstance: () => {},
+    insertInContainerBefore: (parent, child, beforeChild) => {
+      parent.addChildBefore(child, beforeChild)
+    },
 
     // --------- Text instances ---------
     createTextInstance: () => {

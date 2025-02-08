@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Renderer } from '@/core/renderer'
 import { createRenderer } from './create-renderer'
-// import { startRafRunner } from '@/core/raf'
 import type React from 'react'
-// import instances from './instances'
+import { FiberProvider } from 'its-fine'
 import { FiberRoot } from 'react-reconciler'
 import { startRafRunner } from '@/core/utils/raf'
 import type { RendererOptions } from '@/core/renderer'
@@ -33,7 +32,9 @@ export function render(element: React.ReactNode, options: RendererOptions = {}) 
     instances[instanceKey] = root
   }
 
-  reconciler.updateContainer(element, root, null, () => {
+  const Element = () => <FiberProvider>{element}</FiberProvider>
+
+  reconciler.updateContainer(<Element />, root, null, () => {
     // render complete, start frame loop
   })
   // reconciler.injectIntoDevTools({
@@ -46,6 +47,8 @@ export function render(element: React.ReactNode, options: RendererOptions = {}) 
   startRafRunner(() => {
     // Render ascii to the console
     const ascii = containerObject.render()
+    console.clear()
+    // process.stdout.clearScreenDown()
     process.stdout.write('\x1Bc')
     console.log(ascii)
     containerObject.clear()

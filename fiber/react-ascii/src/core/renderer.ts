@@ -69,6 +69,16 @@ export class Renderer {
     this._onFrameCallbacks.removeCallback(id)
   }
 
+  private _onAfterFrameCallbacks = subscribable<RenderFrameCallback>()
+
+  public onAfterFrame(callback: RenderFrameCallback) {
+    return this._onAfterFrameCallbacks.addCallback(callback)
+  }
+
+  public removeAfterFrameCallback(id: string | RenderFrameCallback) {
+    this._onAfterFrameCallbacks.removeCallback(id)
+  }
+
   public intToHex(color: number) {
     const rgb = intToRGBA(color)
     return (
@@ -84,7 +94,13 @@ export class Renderer {
   }
 
   public removeChild(child: RendererChild) {
+    this.children = this.children.filter(c => c.id !== child.id)
+  }
+
+  public addChildBefore(child: RendererChild, beforeChild: RendererChild) {
     this.children = this.children.filter(c => c !== child)
+
+    this.children.splice(this.children.indexOf(beforeChild), 0, child)
   }
 
   private getAscii() {
@@ -122,6 +138,8 @@ export class Renderer {
 
     this.renderBuffer()
     const ascii = this.getAscii()
+
+    this._onAfterFrameCallbacks.runCallbacks(this, delta)
     return ascii
   }
 

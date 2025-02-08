@@ -1,6 +1,6 @@
 import { vec3, mat3, mat4 } from 'gl-matrix'
 
-interface SensorInterface {
+export interface SensorInterface {
   id: string
   active: boolean
   position: vec3
@@ -55,6 +55,7 @@ export interface SensorOptions {
   rotation?: vec3
   active?: boolean
   onIntersect?: OnIntersectCallback
+  data?: Record<string | number | symbol, unknown>
 }
 
 export class SensorDetector implements SensorInterface {
@@ -63,6 +64,7 @@ export class SensorDetector implements SensorInterface {
   position: vec3
   halfSize: vec3
   rotation: vec3
+  rotationMat: mat3
   data: Record<string | number | symbol, unknown>
   obb: OBB
   onIntersect?: OnIntersectCallback
@@ -72,6 +74,7 @@ export class SensorDetector implements SensorInterface {
     halfSize = vec3.fromValues(1, 1, 1),
     rotation = vec3.fromValues(0, 0, 0),
     active = true,
+    data = {},
     onIntersect
   }: SensorOptions) {
     this.id = crypto.randomUUID()
@@ -79,18 +82,28 @@ export class SensorDetector implements SensorInterface {
     this.position = position
     this.halfSize = halfSize
     this.rotation = rotation
-    this.data = {}
+    this.data = data
     this.onIntersect = onIntersect
 
-    const rotationMat = mat3.create()
+    this.rotationMat = mat3.create()
     const rotationMat4 = mat4.create()
     mat4.fromRotation(rotationMat4, rotation[1], [0, 1, 0]) // Simple Y-axis rotation
-    mat3.fromMat4(rotationMat, rotationMat4)
+    mat3.fromMat4(this.rotationMat, rotationMat4)
 
-    this.obb = new OBB(this.position, this.halfSize, rotationMat)
+    this.obb = new OBB(this.position, this.halfSize, this.rotationMat)
 
     // Add to store
     sensorsStore[this.id] = this
+  }
+
+  setPosition(position: vec3) {
+    vec3.copy(this.position, position)
+    this.obb.set(this.position, this.halfSize, this.rotationMat)
+  }
+
+  setHalfSize(halfSize: vec3) {
+    vec3.copy(this.halfSize, halfSize)
+    this.obb.set(this.position, this.halfSize, this.rotationMat)
   }
 
   public update() {
