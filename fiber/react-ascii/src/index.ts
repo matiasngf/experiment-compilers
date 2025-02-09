@@ -9,9 +9,6 @@ export * from './core/utils/raf'
 export * from './core/utils/subscribable'
 export * from './core/utils/sensor'
 
-// Matrix
-export { vec2, vec3, vec4 } from 'gl-matrix'
-
 // React
 export * from './fiber/render'
 export * from './fiber/hooks'

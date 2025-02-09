@@ -17,9 +17,6 @@ importers:
       chalk:
         specifier: ^5.4.1
         version: 5.4.1
-      gl-matrix:
-        specifier: ^3.4.3
-        version: 3.4.3
       its-fine:
         specifier: ^1.2.5
         version: 1.2.5(@types/react@19.0.8)(react@18.3.1)
@@ -130,15 +127,9 @@ importers:
 
   fiber/react-ascii/examples/space-invaders:
     dependencies:
-      gl-matrix:
-        specifier: ^3.4.3
-        version: 3.4.3
       react:
         specifier: ^18.3.1
         version: 18.3.1
-      react-ascii:
-        specifier: workspace:*
-        version: link:../..
       zustand:
         specifier: ^5.0.3
         version: 5.0.3(@types/react@18.3.18)(react@18.3.1)
@@ -167,6 +158,9 @@ importers:
       nodemon:
         specifier: ^3.1.9
         version: 3.1.9
+      react-ascii:
+        specifier: workspace:*
+        version: link:../..
       swc-loader:
         specifier: ^0.2.6
         version: 0.2.6(@swc/core@1.10.8)(webpack@5.69.1)
@@ -3597,10 +3591,6 @@ packages:
     dependencies:
       image-q: 4.0.0
       omggif: 1.0.10
-    dev: false
-
-  /gl-matrix@3.4.3:
-    resolution: {integrity: sha512-wcCp8vu8FT22BnvKVPjXa/ICBWRq/zjFfdofZy1WSpQZpphblv12/bOQLBC1rMM7SGOFS9ltVmKOHil5+Ml7gA==}
     dev: false
 
   /glob-parent@5.1.2:

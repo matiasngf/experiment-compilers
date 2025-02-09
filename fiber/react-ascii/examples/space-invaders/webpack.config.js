@@ -1,6 +1,7 @@
 const path = require("path");
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const webpack = require('webpack');
+const ShebangPlugin = require('./webpack/shebang-plugin');
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -14,14 +15,18 @@ plugins.push(new webpack.ProvidePlugin({
   React: 'react'
 }))
 
+plugins.push(new ShebangPlugin())
+
 module.exports = {
   mode: isProduction ? "production" : "development",
-  devtool: "source-map",
+  devtool: isProduction ? false : "source-map",
+  target: 'node',
+  externalsPresets: { node: true },
   entry: path.join(__dirname, "src", "index.tsx"),
   output: {
     path: path.join(__dirname, "dist"),
     filename: "bundle.js",
-    clean: true
+    clean: true,
   },
   target: 'node',
   module: {
@@ -40,7 +45,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: path.resolve(__dirname, 'loaders/buffer-loader.js'),
+            loader: path.resolve(__dirname, 'webpack/buffer-loader.js'),
           },
         ],
       },

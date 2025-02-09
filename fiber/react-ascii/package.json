@@ -22,7 +22,6 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.4.1",
-    "gl-matrix": "^3.4.3",
     "its-fine": "^1.2.5",
     "jimp": "^1.6.0",
     "react-devtools-core": "^6.1.0",

@@ -11,7 +11,6 @@ import {
   COLLIDERS
 } from './constants'
 
-import { vec3 } from 'gl-matrix'
 import { Sensor, useFrame } from 'react-ascii'
 import { ENEMY_WIDTH } from './constants'
 import { useCallback, useEffect, useRef } from 'react'
@@ -154,13 +153,10 @@ function Alien({ id, x, y }: { id: string; x: number; y: number }) {
           type: COLLIDERS.ENEMY,
           id
         }}
-        position={vec3.fromValues(x, y, 0)}
-        size={vec3.fromValues(ENEMY_WIDTH, ENEMY_HEIGHT, 1)}
+        position={{ x, y }}
+        size={{ x: ENEMY_WIDTH, y: ENEMY_HEIGHT }}
       />
       <asciiImage src={alienIamge} position={{ x, y }} />
-
-      {/* Projectiles */}
-      {/* <Projectile x={Math.floor(x + ENEMY_WIDTH / 2)} y={y} /> */}
     </>
   )
 }
@@ -196,8 +192,8 @@ const Projectile = ({ id, x, y }: ProjectileProps) => {
           type: COLLIDERS.ENEMY_PROJECTILE,
           id
         }}
-        position={vec3.fromValues(projectileX, projectileY, 0)}
-        size={vec3.fromValues(projectileWidth, projectileHeight, 1)}
+        position={{ x: projectileX, y: projectileY }}
+        size={{ x: projectileWidth, y: projectileHeight }}
       />
     </>
   )

@@ -1,7 +1,6 @@
 import playerImage from './assets/player.png'
 
 import { create } from 'zustand'
-import { vec3 } from 'gl-matrix'
 import { useState, useRef } from 'react'
 import { useFrame, useInput, Sensor } from 'react-ascii'
 import {
@@ -45,11 +44,11 @@ export function Player() {
   })
 
   const [sensorProps, setSensorProps] = useState({
-    position: vec3.fromValues(position.x, position.y, 0),
-    size: vec3.fromValues(PLAYER_WIDTH, PLAYER_HEIGHT, 1)
+    position: { x: position.x, y: position.y },
+    size: { x: PLAYER_WIDTH, y: PLAYER_HEIGHT }
   })
 
-  const MOVE_SPEED = 2
+  const MOVE_SPEED = 1
 
   useInput(event => {
     if (event.name === 'left') {
@@ -58,7 +57,7 @@ export function Player() {
         ...pos,
         x: newX
       }))
-      setSensorProps(prev => ({ ...prev, position: vec3.fromValues(newX, prev.position[1], 0) }))
+      setSensorProps(prev => ({ ...prev, position: { x: newX, y: prev.position.y } }))
     } else if (event.name === 'right') {
       const newX = Math.min(
         CANVAS_WIDTH - PLAYER_WIDTH - CANVAS_PADDING_X + 1,
@@ -68,7 +67,7 @@ export function Player() {
         ...pos,
         x: newX
       }))
-      setSensorProps(prev => ({ ...prev, position: vec3.fromValues(newX, prev.position[1], 0) }))
+      setSensorProps(prev => ({ ...prev, position: { x: newX, y: prev.position.y } }))
     } else if (event.name === 'space') {
       addProjectile(crypto.randomUUID(), Math.floor(position.x + PLAYER_WIDTH / 2), position.y - 1)
     }
@@ -130,8 +129,8 @@ function PlayerProjectile({ id, x, y }: PlayerProjectileProps) {
         data={{
           type: COLLIDERS.PLAYER_PROJECTILE
         }}
-        position={vec3.fromValues(x, y - projectilePosY, 0)}
-        size={vec3.fromValues(1, 1, 1)}
+        position={{ x, y: y - projectilePosY }}
+        size={{ x: 1, y: 1 }}
       />
       <asciiColor color="white" position={{ x, y: y - projectilePosY }} size={{ x: 1, y: 1 }} />
     </>

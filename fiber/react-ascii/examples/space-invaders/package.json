@@ -1,9 +1,20 @@
 {
-  "name": "example-space-invaders",
-  "private": true,
-  "version": "0.0.0",
+  "name": "space-invaders-cli",
+  "private": false,
+  "version": "0.0.3",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "space-invaders": "dist/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matiasngf/experiments-compilers",
+    "directory": "fiber/react-ascii/examples/space-invaders"
+  },
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack",
     "start": "node dist/bundle.js",
     "build-start": "webpack && node dist/bundle.js",
     "build:watch": "cross-env NODE_ENV=development webpack --watch",
@@ -11,12 +22,11 @@
     "dev": "concurrently --raw --hide 0 \"npm run build:watch\" \"npm run start:watch\""
   },
   "dependencies": {
-    "gl-matrix": "^3.4.3",
     "react": "^18.3.1",
-    "react-ascii": "workspace:*",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "react-ascii": "workspace:*",
     "@swc/core": "^1.10.8",
     "@types/node": "^22.10.7",
     "@types/react": "^18.2.0",
