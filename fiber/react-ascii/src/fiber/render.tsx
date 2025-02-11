@@ -47,10 +47,8 @@ export function render(element: React.ReactNode, options: RendererOptions = {}) 
   startRafRunner(() => {
     // Render ascii to the console
     const ascii = containerObject.render()
-    console.clear()
-    // process.stdout.clearScreenDown()
     process.stdout.write('\x1Bc')
-    console.log(ascii)
+    process.stdout.write(ascii)
     containerObject.clear()
   })
 }

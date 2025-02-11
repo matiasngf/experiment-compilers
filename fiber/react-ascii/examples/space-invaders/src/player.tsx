@@ -2,7 +2,7 @@ import playerImage from './assets/player.png'
 
 import { create } from 'zustand'
 import { useState, useRef } from 'react'
-import { useFrame, useInput, Sensor } from 'react-ascii'
+import { useFrame, useInput, Sensor, SensorInterface } from 'react-ascii'
 import {
   CANVAS_WIDTH,
   CANVAS_HEIGHT,
@@ -43,11 +43,6 @@ export function Player() {
     y: CANVAS_HEIGHT - PLAYER_HEIGHT - 2
   })
 
-  const [sensorProps, setSensorProps] = useState({
-    position: { x: position.x, y: position.y },
-    size: { x: PLAYER_WIDTH, y: PLAYER_HEIGHT }
-  })
-
   const MOVE_SPEED = 1
 
   useInput(event => {
@@ -57,7 +52,6 @@ export function Player() {
         ...pos,
         x: newX
       }))
-      setSensorProps(prev => ({ ...prev, position: { x: newX, y: prev.position.y } }))
     } else if (event.name === 'right') {
       const newX = Math.min(
         CANVAS_WIDTH - PLAYER_WIDTH - CANVAS_PADDING_X + 1,
@@ -67,28 +61,40 @@ export function Player() {
         ...pos,
         x: newX
       }))
-      setSensorProps(prev => ({ ...prev, position: { x: newX, y: prev.position.y } }))
     } else if (event.name === 'space') {
       addProjectile(crypto.randomUUID(), Math.floor(position.x + PLAYER_WIDTH / 2), position.y - 1)
     }
   })
 
+  const interceptCallback = (intercepted: SensorInterface[]) => {
+    intercepted.forEach(sensor => {
+      if (sensor.data.type === COLLIDERS.ENEMY_PROJECTILE) {
+        process.exit(0)
+      }
+    })
+  }
+
   return (
     <>
-      <Sensor
-        {...sensorProps}
-        onIntersect={intercepted => {
-          intercepted.forEach(sensor => {
-            if (sensor.data.type === COLLIDERS.ENEMY_PROJECTILE) {
-              process.exit(0)
-            }
-          })
-        }}
-      />
       <asciiImage src={playerImage} position={position} />
       {Object.entries(projectiles).map(([id, { x, y }]) => (
         <PlayerProjectile key={id} id={id} x={x} y={y} />
       ))}
+      <Sensor
+        position={{ x: position.x, y: position.y + 3 }}
+        size={{ x: PLAYER_WIDTH, y: 2 }}
+        onIntersect={interceptCallback}
+      />
+      <Sensor
+        position={{ x: position.x + 3, y: position.y }}
+        size={{ x: 1, y: 1 }}
+        onIntersect={interceptCallback}
+      />
+      <Sensor
+        position={{ x: position.x + 2, y: position.y + 1 }}
+        size={{ x: 3, y: 4 }}
+        onIntersect={interceptCallback}
+      />
     </>
   )
 }
@@ -130,7 +136,7 @@ function PlayerProjectile({ id, x, y }: PlayerProjectileProps) {
           type: COLLIDERS.PLAYER_PROJECTILE
         }}
         position={{ x, y: y - projectilePosY }}
-        size={{ x: 1, y: 1 }}
+        size={{ x: 1, y: 2 }}
       />
       <asciiColor color="white" position={{ x, y: y - projectilePosY }} size={{ x: 1, y: 1 }} />
     </>
