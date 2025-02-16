@@ -1,0 +1,15 @@
+{
+  "jsc": {
+    "target": "es2015",
+    "parser": {
+      "syntax": "typescript",
+      "jsx": true,
+      "tsx": true,
+      "dynamicImport": true,
+      "classProperty": true,
+      "exportNamespaceFrom": true,
+      "exportDefaultFrom": true
+    }
+  },
+  "minify": false
+}
