@@ -7,8 +7,6 @@ import {
 } from '@/renderer/primitives-3d'
 
 export const createInstance: ReconcilerConfig['createInstance'] = (type, props) => {
-  console.log('createInstance', type)
-
   switch (type) {
     case InstanceType.Sphere: {
       const sphereProps = props as SphereProps
