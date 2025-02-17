@@ -4,23 +4,32 @@ import { createRenderer } from './create-renderer'
 import type React from 'react'
 import { FiberProvider } from 'its-fine'
 import { FiberRoot } from 'react-reconciler'
-import type { ContainerParams } from '@/renderer/container'
+import { version } from 'react'
+
+const __DEV__ = /* @__PURE__ */ (() =>
+  typeof process !== 'undefined' && process.env.NODE_ENV !== 'production')()
 
 const reconciler = createRenderer()
 
-const instances = {} as any
+const instances = new Map<
+  HTMLElement,
+  {
+    fiberRoot: FiberRoot
+    container: Container
+  }
+>()
 
-const instanceKey = 'main'
-
-export function render(element: React.ReactNode, options: ContainerParams) {
-  console.log('RENDER')
-
-  const containerObject = new Container(options)
-
-  let root: FiberRoot = instances[instanceKey] as FiberRoot
+/**
+ * Render a React component into a DOM element.
+ * @param element - The React component to render.
+ * @param target - The DOM element to render into.
+ */
+export function render(element: React.ReactNode, target: HTMLElement) {
+  let root = instances.get(target)
 
   if (!root) {
-    root = reconciler.createContainer(
+    const containerObject = new Container({ canvasContainer: target })
+    const fiberRoot = reconciler.createContainer(
       containerObject,
       0, // LegacyRoot
       null, // hostContext
@@ -30,25 +39,34 @@ export function render(element: React.ReactNode, options: ContainerParams) {
       error => console.error(error), // onRecoverableError
       null // transitionCallbacks
     )
-    instances[instanceKey] = root
+    containerObject.startRaf()
+    root = {
+      container: containerObject,
+      fiberRoot: fiberRoot
+    }
+    instances.set(target, root)
   }
 
   const Element = () => <FiberProvider>{element}</FiberProvider>
 
-  reconciler.updateContainer(<Element />, root, null, () => {
-    // render complete, start frame loop
-    const frame = () => {
-      containerObject.render()
-      requestAnimationFrame(frame)
-    }
-
-    frame()
+  reconciler.updateContainer(<Element />, root.fiberRoot, null, () => undefined)
+  reconciler.injectIntoDevTools({
+    bundleType: __DEV__ ? 1 : 0,
+    // Reporting React DOM's version
+    // See https://github.com/facebook/react/issues/16666#issuecomment-532639905
+    version: version,
+    rendererPackageName: 'react-jscad-fiber'
   })
-  // reconciler.injectIntoDevTools({
-  //   bundleType: 0,
-  //   // Reporting React DOM's version
-  //   // See https://github.com/facebook/react/issues/16666#issuecomment-532639905
-  //   version: '0.0.1',
-  //   rendererPackageName: 'react-ascii'
-  // })
+}
+
+export function unmountComponentAtNode(target: HTMLElement) {
+  const root = instances.get(target)
+  if (root) {
+    // stop frame loop
+    root.container.stopRaf()
+    // unmount component
+    reconciler.updateContainer(<></>, root.fiberRoot, null, () => {
+      instances.delete(target)
+    })
+  }
 }
