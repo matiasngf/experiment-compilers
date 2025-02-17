@@ -97,4 +97,28 @@ export class Container {
     })
     this.renderer(this.renderOptions)
   }
+
+  public rafController: AbortController | null = null
+
+  public startRaf() {
+    if (this.rafController) {
+      // frame loop already running
+      return
+    }
+
+    this.rafController = new AbortController()
+    const frame = () => {
+      if (this.rafController?.signal.aborted) {
+        this.rafController = null
+        return
+      }
+      this.render()
+      requestAnimationFrame(frame)
+    }
+    frame()
+  }
+
+  public stopRaf() {
+    this.rafController?.abort()
+  }
 }
