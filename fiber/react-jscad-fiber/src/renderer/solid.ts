@@ -14,6 +14,9 @@ export abstract class CadSolid {
   private smoothNormals?: boolean
   private color?: number[]
 
+  public needsUpdate = false
+  public entities: Entity[] = []
+
   abstract solid: Geom3 | Geom2
 
   constructor(params: CadSolidParams) {
@@ -23,13 +26,18 @@ export abstract class CadSolid {
   }
 
   getEntity(): Entity[] {
-    return entitiesFromSolids(
-      {
-        smoothNormals: this.smoothNormals,
-        color: this.color
-      },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.solid as any
-    )
+    if (this.needsUpdate) {
+      this.entities = entitiesFromSolids(
+        {
+          smoothNormals: this.smoothNormals,
+          color: this.color
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.solid as any
+      )
+      this.needsUpdate = false
+    }
+
+    return this.entities
   }
 }

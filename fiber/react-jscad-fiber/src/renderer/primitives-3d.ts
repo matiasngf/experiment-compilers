@@ -23,14 +23,13 @@ export class PrimitiveSolid<T extends CadSolidParams> extends CadSolid {
     this.primitiveParams = primitiveParams
 
     // select the creation class function
-    this.builder = primitives[this.type] as any
+    this.builder = primitives[this.type] as (props: T) => Geom3
     this.solid = this.builder(this.primitiveParams)
-    console.log('solid created:', type)
+    this.needsUpdate = true
   }
 
   public updateProps({ color, smoothNormals, ...props }: T) {
-    console.log('Updating props', props)
-
+    this.needsUpdate = true
     this.solid = this.builder({ ...this.primitiveParams, ...props, color, smoothNormals })
   }
 }
