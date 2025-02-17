@@ -342,6 +342,126 @@ importers:
         specifier: ^5.7.2
         version: 5.7.2
 
+  fiber/react-jscad-fiber:
+    dependencies:
+      '@jscad/core':
+        specifier: ^2.6.12
+        version: 2.6.12
+      '@jscad/modeling':
+        specifier: ^2.12.5
+        version: 2.12.5
+      '@jscad/regl-renderer':
+        specifier: ^2.6.12
+        version: 2.6.12
+      its-fine:
+        specifier: ^1.2.5
+        version: 1.2.5(@types/react@19.0.8)(react@18.3.1)
+      react-reconciler:
+        specifier: ^0.27.0
+        version: 0.27.0(react@18.3.1)
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.10.7
+      '@types/react':
+        specifier: ^19.0.8
+        version: 19.0.8
+      '@types/react-reconciler':
+        specifier: ^0.28.9
+        version: 0.28.9(@types/react@19.0.8)
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.13.1
+        version: 6.13.1(@typescript-eslint/parser@6.13.1)(eslint@8.54.0)(typescript@5.7.2)
+      '@typescript-eslint/parser':
+        specifier: ^6.13.1
+        version: 6.13.1(eslint@8.54.0)(typescript@5.7.2)
+      eslint:
+        specifier: ^8.54.0
+        version: 8.54.0
+      eslint-config-prettier:
+        specifier: ^9.0.0
+        version: 9.0.0(eslint@8.54.0)
+      eslint-plugin-import:
+        specifier: ^2.29.0
+        version: 2.29.0(@typescript-eslint/parser@6.13.1)(eslint@8.54.0)
+      eslint-plugin-prettier:
+        specifier: ^5.0.1
+        version: 5.0.1(eslint-config-prettier@9.0.0)(eslint@8.54.0)(prettier@3.1.0)
+      eslint-plugin-react:
+        specifier: ^7.33.2
+        version: 7.33.2(eslint@8.54.0)
+      eslint-plugin-react-hooks:
+        specifier: ^4.6.0
+        version: 4.6.0(eslint@8.54.0)
+      prettier:
+        specifier: ^3.1.0
+        version: 3.1.0
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
+      vite:
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@22.10.7)
+      vite-plugin-dts:
+        specifier: ^3.7.3
+        version: 3.7.3(@types/node@22.10.7)(typescript@5.7.2)(vite@5.1.4)
+
+  fiber/react-jscad-fiber/examples/basic:
+    dependencies:
+      '@jscad/core':
+        specifier: ^2.6.12
+        version: 2.6.12
+      '@jscad/modeling':
+        specifier: ^2.12.5
+        version: 2.12.5
+      '@jscad/regl-renderer':
+        specifier: ^2.6.12
+        version: 2.6.12
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.3.1)
+      react-jscad-fiber:
+        specifier: workspace:*
+        version: link:../..
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.43
+        version: 18.3.18
+      '@types/react-dom':
+        specifier: ^18.2.17
+        version: 18.2.17
+      '@vitejs/plugin-react':
+        specifier: ^4.2.1
+        version: 4.2.1(vite@5.1.4)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.6.3
+      vite:
+        specifier: ^5.0.8
+        version: 5.1.4(@types/node@22.10.7)
+
+  fiber/react-jscad-fiber/examples/vanilla:
+    dependencies:
+      '@jscad/core':
+        specifier: ^2.6.12
+        version: 2.6.12
+      '@jscad/modeling':
+        specifier: ^2.12.5
+        version: 2.12.5
+      '@jscad/regl-renderer':
+        specifier: ^2.6.12
+        version: 2.6.12
+    devDependencies:
+      vite:
+        specifier: ^5.0.0
+        version: 5.1.4(@types/node@22.10.7)
+
   fiber/react-midi-fiber:
     dependencies:
       '@tonejs/midi':
@@ -1358,6 +1478,26 @@ packages:
       '@babel/plugin-transform-react-jsx': 7.25.9(@babel/core@7.24.4)
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@babel/plugin-transform-react-jsx-self@7.25.9(@babel/core@7.24.4):
+    resolution: {integrity: sha512-y8quW6p0WHkEhmErnfe58r7x0A70uKphQm8Sp8cV7tjNQwK56sNVK0M73LK3WuYmsuyrftut4xAkjjgU0twaMg==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.4
+      '@babel/helper-plugin-utils': 7.26.5
+    dev: true
+
+  /@babel/plugin-transform-react-jsx-source@7.25.9(@babel/core@7.24.4):
+    resolution: {integrity: sha512-+iqjT8xmXhhYv4/uiYd8FNQsraMFZIfxVSqxxVSZP0WbbSAWvBXAul0m/zu+7Vv4O/3WtApy9pmaTMiumEZgfg==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.4
+      '@babel/helper-plugin-utils': 7.26.5
     dev: true
 
   /@babel/plugin-transform-react-jsx@7.25.9(@babel/core@7.24.4):
@@ -2641,6 +2781,175 @@ packages:
       '@jridgewell/sourcemap-codec': 1.5.0
     dev: true
 
+  /@jscad/3mf-serializer@2.1.14:
+    resolution: {integrity: sha512-Jq/32x9gYbKpaL4Y4ny2ReQnGMeE+ygEMjZP/SILcUZg92G5/95mFmoOy9aoiXykF44jolzH4lgvlUF57JEhMQ==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/modeling': 2.12.5
+      fflate: 0.7.3
+      onml: 1.2.0
+    dev: false
+
+  /@jscad/amf-deserializer@2.3.10:
+    resolution: {integrity: sha512-jOGsghWefoNloD/4e+Qr4Q0eTcAv7ARfRZNb0hvupFytwnETrsG34TlvD+eLrny7ZupPlFKsyYuNo9gzeZtqrQ==}
+    dependencies:
+      '@jscad/io-utils': 2.0.30
+      '@jscad/modeling': 2.12.5
+      saxes: 5.0.1
+    dev: false
+
+  /@jscad/amf-serializer@2.1.20:
+    resolution: {integrity: sha512-eF9zrskgTnIomTb2sjrNU6iqC1ONvBDpet1KZ+1N5UY8GKyyIIrFwFVcwitjtdjHtQ1/6AFxD8Kk4rhhm5GSxA==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/modeling': 2.12.5
+      onml: 1.3.0
+    dev: false
+
+  /@jscad/array-utils@2.1.4:
+    resolution: {integrity: sha512-c31r4zSKsE+4Xfwk2V8monDA0hx5G89QGzaakWVUvuGNowYS9WSsYCwHiTIXodjR+HEnDu4okQ7k/whmP0Ne2g==}
+    dev: false
+
+  /@jscad/core@2.6.12:
+    resolution: {integrity: sha512-82M3DToJlaJpjyohvZ6y2q0Fw4MlGctOXWSmkwTg2KjVsL9H8mSfsKTmOzdG4uJ7k7BSOh5xjhfs2ZVXszTdvA==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/io': 2.4.11
+      '@jscad/io-utils': 2.0.30
+      '@jscad/modeling': 2.12.5
+      json5: 2.2.3
+      strip-bom: 4.0.0
+    dev: false
+
+  /@jscad/dxf-deserializer@2.3.27:
+    resolution: {integrity: sha512-ltBpuBPmBOdYvy0RNUCyj5PYhHs1S/DhLjR6Cj0U9tybA6rpVxAoQ3NQ9WlQHDcDV+VRZ1EWJcHmPZLFkLB2mA==}
+    dependencies:
+      '@jscad/io-utils': 2.0.30
+      '@jscad/modeling': 2.12.5
+    dev: false
+
+  /@jscad/dxf-serializer@2.1.20:
+    resolution: {integrity: sha512-4GvdaRn8TkelDFiJiSnsbD8lWBE18nowpCBTZ0jifEQYF4rZ3pViMQuq31ti2VTDjpMyJpBzEp9Xd4l2jiYhpQ==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/modeling': 2.12.5
+    dev: false
+
+  /@jscad/io-utils@2.0.30:
+    resolution: {integrity: sha512-VL0eCrjYGp9Xj+/3G9ZzunnRmUQSyHB1+QIBw9ZQU4UJWo7HKlbgQ+kFwCT4EtKb7c+83eHWVBlH4Hvt7Znvug==}
+    dev: false
+
+  /@jscad/io@2.4.11:
+    resolution: {integrity: sha512-65x2HxJSb2IH1W2xWlfxOsf4BUSvxGcsZYIUE43CzAIy3053dYkg4dadbH7G6J3JgDdlSj7q+rXOO7j84ovI+w==}
+    dependencies:
+      '@jscad/3mf-serializer': 2.1.14
+      '@jscad/amf-deserializer': 2.3.10
+      '@jscad/amf-serializer': 2.1.20
+      '@jscad/array-utils': 2.1.4
+      '@jscad/dxf-deserializer': 2.3.27
+      '@jscad/dxf-serializer': 2.1.20
+      '@jscad/io-utils': 2.0.30
+      '@jscad/json-deserializer': 2.0.31
+      '@jscad/json-serializer': 2.0.30
+      '@jscad/modeling': 2.12.5
+      '@jscad/obj-deserializer': 2.0.30
+      '@jscad/obj-serializer': 2.1.20
+      '@jscad/stl-deserializer': 2.1.27
+      '@jscad/stl-serializer': 2.1.20
+      '@jscad/svg-deserializer': 2.5.11
+      '@jscad/svg-serializer': 2.3.18
+      '@jscad/x3d-deserializer': 2.2.10
+      '@jscad/x3d-serializer': 2.4.10
+    dev: false
+
+  /@jscad/json-deserializer@2.0.31:
+    resolution: {integrity: sha512-d4C2mKWvc5xFt7KG5qkpUIh7HpZ+J2fpwg/IrCc7I1aKqVtyInf+zD5GxH0xB0dBeLLOsJMIYHvqmOfmSjj0rg==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/io-utils': 2.0.30
+    dev: false
+
+  /@jscad/json-serializer@2.0.30:
+    resolution: {integrity: sha512-Um37ml4MYFqw5rfqnItnLz4JNJLOhZONgWiIUkBUvgiD6cqiieEny9Sk3YeJuwkLoqrW9OT05JPv32MnT7u3eQ==}
+    dependencies:
+      '@jscad/modeling': 2.12.5
+    dev: false
+
+  /@jscad/modeling@2.12.5:
+    resolution: {integrity: sha512-7deHWmE+CKBx2RyxDxl9Pie0bDOHHtcsh4V0gKViu27abYXKGl8+myoddwIvxLczwnw31ZZXDdUdm0Ef51YwQg==}
+    dev: false
+
+  /@jscad/obj-deserializer@2.0.30:
+    resolution: {integrity: sha512-uO5OwJXECLeRZHOxaf280FwCtR0319uzV+X5wgEPIoceuVNmTcus+BCs+ldNe4rmDWummVLreTQv1qkIt5u1Lg==}
+    dependencies:
+      '@jscad/io-utils': 2.0.30
+      '@jscad/modeling': 2.12.5
+    dev: false
+
+  /@jscad/obj-serializer@2.1.20:
+    resolution: {integrity: sha512-k3u5oE56kE37azocjxFEsBBLRZdTcfONX598anfunIcpn6+2IkZVMVE9OJtuoMd51mVDrjYc4+FLjZvtd6281Q==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/modeling': 2.12.5
+    dev: false
+
+  /@jscad/regl-renderer@2.6.12:
+    resolution: {integrity: sha512-feI9Oi9gYyTmZHa68NtalHwulNyQ9F+xNoNdCEVhJ07kEVWtp8WU2tSRty1Je8KJt1pZBxAWdXHMST+U4PtUWQ==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      camera-unproject: 1.0.1
+      gl-mat4: 1.2.0
+      gl-vec3: 1.1.3
+      regl: 2.1.0
+    dev: false
+
+  /@jscad/stl-deserializer@2.1.27:
+    resolution: {integrity: sha512-rIRcSWkDIbFyo1iCOySimroaWNJdn1KR0B2rxBXI1XXoBTZ2jfENFgqDh/FamdxmyDavL7MNI/guJRbC/471Pg==}
+    dependencies:
+      '@jscad/io-utils': 2.0.30
+      '@jscad/modeling': 2.12.5
+    dev: false
+
+  /@jscad/stl-serializer@2.1.20:
+    resolution: {integrity: sha512-/hLO+eLsWDNLkAheZ8SoOCzj8wYWiHABbT/O5dhy+pyXT0mLKOv0dHV1Z8rYPySjhdxHcZ1Pzi3IF5bi+P/9bg==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/modeling': 2.12.5
+    dev: false
+
+  /@jscad/svg-deserializer@2.5.11:
+    resolution: {integrity: sha512-D1heO5XbYg99rwnWS2MFv+GgORIslOStHLXqa0m/UqFaU4X6rY1SdOYBhWVL1abFvT3/pKfB0oCt6QIw8FdZCA==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/io-utils': 2.0.30
+      '@jscad/modeling': 2.12.5
+      saxes: 5.0.1
+    dev: false
+
+  /@jscad/svg-serializer@2.3.18:
+    resolution: {integrity: sha512-hWRGSMayD0m8otRU+PXJ0NbBlduS11CuSCj7xrmrzLclm9ICZANBR48Ea9H4yxtE4GTX1Wbs+wrnAikF4iw7NA==}
+    dependencies:
+      '@jscad/modeling': 2.12.5
+      onml: 1.3.0
+    dev: false
+
+  /@jscad/x3d-deserializer@2.2.10:
+    resolution: {integrity: sha512-eh9Tl4B2pVnEAsj3jbg5KM61u1IhHhaQ2mUZI82jdCV8re2q0yZjOYPJ1WmMBGEclur00DevA+aV6dz2Vx5zLQ==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/io-utils': 2.0.30
+      '@jscad/modeling': 2.12.5
+      saxes: 5.0.1
+    dev: false
+
+  /@jscad/x3d-serializer@2.4.10:
+    resolution: {integrity: sha512-I6T4HR1pZsLL4C2m03fuZIQNynR2how1+tESekvMHkop2O8i51eYwH/+349KQvdMc5RlDYB0G0pjHQowdrh1bQ==}
+    dependencies:
+      '@jscad/array-utils': 2.1.4
+      '@jscad/modeling': 2.12.5
+      onml: 1.3.0
+    dev: false
+
   /@jsonjoy.com/base64@1.1.2(tslib@2.8.1):
     resolution: {integrity: sha512-q6XAnWQDIMA3+FTiOYajoYqySkO+JSat0ytXGSuRdq9uXE7o92gzuQwQM14xaCRlBLGq3v5miDGC4vkVTn54xA==}
     engines: {node: '>=10.0'}
@@ -3152,6 +3461,35 @@ packages:
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
     dev: true
 
+  /@types/babel__core@7.20.5:
+    resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
+    dependencies:
+      '@babel/parser': 7.26.9
+      '@babel/types': 7.26.9
+      '@types/babel__generator': 7.6.8
+      '@types/babel__template': 7.4.4
+      '@types/babel__traverse': 7.20.6
+    dev: true
+
+  /@types/babel__generator@7.6.8:
+    resolution: {integrity: sha512-ASsj+tpEDsEiFr1arWrlN6V3mdfjRMZt6LtK/Vp/kreFLnr5QH5+DhvD5nINYZXzwJvXeGq+05iUXcAzVrqWtw==}
+    dependencies:
+      '@babel/types': 7.26.9
+    dev: true
+
+  /@types/babel__template@7.4.4:
+    resolution: {integrity: sha512-h/NUaSyG5EyxBIp8YRxo4RMe2/qQgvyowRwVMzhYhBCONbW8PUsg4lkFMrhgZhUe5z3L3MiLDuvyJ/CaPa2A8A==}
+    dependencies:
+      '@babel/parser': 7.26.9
+      '@babel/types': 7.26.9
+    dev: true
+
+  /@types/babel__traverse@7.20.6:
+    resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
+    dependencies:
+      '@babel/types': 7.26.9
+    dev: true
+
   /@types/body-parser@1.19.5:
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
     dependencies:
@@ -3301,6 +3639,12 @@ packages:
 
   /@types/range-parser@1.2.7:
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
+    dev: true
+
+  /@types/react-dom@18.2.17:
+    resolution: {integrity: sha512-rvrT/M7Df5eykWFxn6MYt5Pem/Dbyc1N8Y0S9Mrkw2WFCRiqUgw9P7ul2NpwsXCSM1DVdENzdG9J5SreqfAIWg==}
+    dependencies:
+      '@types/react': 18.3.18
     dev: true
 
   /@types/react-reconciler@0.28.9(@types/react@19.0.8):
@@ -3701,6 +4045,22 @@ packages:
 
   /@ungap/structured-clone@1.3.0:
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    dev: true
+
+  /@vitejs/plugin-react@4.2.1(vite@5.1.4):
+    resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      vite: ^4.2.0 || ^5.0.0
+    dependencies:
+      '@babel/core': 7.24.4
+      '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.24.4)
+      '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.24.4)
+      '@types/babel__core': 7.20.5
+      react-refresh: 0.14.2
+      vite: 5.1.4(@types/node@22.10.7)
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@volar/language-core@1.11.1:
@@ -4428,6 +4788,10 @@ packages:
     resolution: {integrity: sha512-FxAv7HpHrXbh3aPo4o2qxHay2lkLY3x5Mw3KeE4KQE8ysVfziWeRZDwcjauvwBSGEC/nXUPzZy8zeh4HokqOnw==}
     engines: {node: '>=4'}
     dev: true
+
+  /camera-unproject@1.0.1:
+    resolution: {integrity: sha512-IAta9EeGGa9rLJsw9Fk0lrZycDg2fF6nl6AvJ+QrkROxc4IaawosU9PQjoqgFYrOe1+kqJlod/W2TAZkTpxZQg==}
+    dev: false
 
   /caniuse-lite@1.0.30001696:
     resolution: {integrity: sha512-pDCPkvzfa39ehJtJ+OwGT/2yvT2SbjfHhiIW2LWOAcMQ7BzwxT/XuyUp4OTOd0XFWA6BKw0JalnBHgSi5DGJBQ==}
@@ -5761,6 +6125,10 @@ packages:
       pend: 1.2.0
     dev: true
 
+  /fflate@0.7.3:
+    resolution: {integrity: sha512-0Zz1jOzJWERhyhsimS54VTqOteCNwRtIlh8isdL0AXLo0g7xNTfTL7oWrkmCnPhZGocKIkWHBistBrrpoNH3aw==}
+    dev: false
+
   /file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -5904,7 +6272,7 @@ packages:
       semver: 7.7.0
       tapable: 2.2.1
       typescript: 5.6.3
-      webpack: 5.69.1(@swc/core@1.10.8)(webpack-cli@6.0.1)
+      webpack: 5.69.1(@swc/core@1.10.8)(webpack-cli@4.9.2)
     dev: true
 
   /form-data@4.0.2:
@@ -6056,6 +6424,14 @@ packages:
     dependencies:
       image-q: 4.0.0
       omggif: 1.0.10
+    dev: false
+
+  /gl-mat4@1.2.0:
+    resolution: {integrity: sha512-sT5C0pwB1/e9G9AvAoLsoaJtbMGjfd/jfxo8jMCKqYYEnjZuFvqV5rehqar0538EmssjdDeiEWnKyBSTw7quoA==}
+    dev: false
+
+  /gl-vec3@1.1.3:
+    resolution: {integrity: sha512-jduKUqT0SGH02l8Yl+mV1yVsDfYgQAJyXGxkJQGyxPLHRiW25DwVIRPt6uvhrEMHftJfqhqKthRcyZqNEl9Xdw==}
     dev: false
 
   /glob-parent@5.1.2:
@@ -6987,7 +7363,6 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
-    dev: true
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -7504,6 +7879,18 @@ packages:
       mimic-fn: 2.1.0
     dev: true
 
+  /onml@1.2.0:
+    resolution: {integrity: sha512-olqYAg18XoHAhm7tK9DdBCOVdts70DGmMgCNLOWyqZokht2utgGSKBB4JHi6pBZpmioAhcYlxK+91L3tsrz+GA==}
+    dependencies:
+      sax: 1.4.1
+    dev: false
+
+  /onml@1.3.0:
+    resolution: {integrity: sha512-RhGUsC6Im2A5vAdIvxE3auRKTqrqUZQl/AYLn8+9lM3SO4da5bwhcI5TcM+hfQxNCSLLOVErsl9p0ZPjKKmz+g==}
+    dependencies:
+      sax: 1.4.1
+    dev: false
+
   /open@10.1.0:
     resolution: {integrity: sha512-mnkeQ1qP5Ue2wd+aivTD3NHd/lZ96Lu0jgf0pwktLPtx6cTZiH7tyeGRRHs0zX0rbrahXPnXlUnbeXyaBBuIaw==}
     engines: {node: '>=18'}
@@ -7940,6 +8327,16 @@ packages:
       - utf-8-validate
     dev: true
 
+  /react-dom@18.2.0(react@18.3.1):
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.3.1
+      scheduler: 0.23.2
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
@@ -7965,6 +8362,11 @@ packages:
       react: 18.3.1
       scheduler: 0.23.2
     dev: false
+
+  /react-refresh@0.14.2:
+    resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
+    engines: {node: '>=0.10.0'}
+    dev: true
 
   /react-refresh@0.16.0:
     resolution: {integrity: sha512-FPvF2XxTSikpJxcr+bHut2H4gJ17+18Uy20D5/F+SKzFap62R3cM5wH6b8WN3LyGSYeQilLEcJcR1fjBSI2S1A==}
@@ -8108,6 +8510,10 @@ packages:
     dependencies:
       jsesc: 3.0.2
     dev: true
+
+  /regl@2.1.0:
+    resolution: {integrity: sha512-oWUce/aVoEvW5l2V0LK7O5KJMzUSKeiOwFuJehzpSFd43dO5spP9r+sSUfhKtsky4u6MCqWJaRL+abzExynfTg==}
+    dev: false
 
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -8300,6 +8706,13 @@ packages:
 
   /sax@1.4.1:
     resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
+    dev: false
+
+  /saxes@5.0.1:
+    resolution: {integrity: sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==}
+    engines: {node: '>=10'}
+    dependencies:
+      xmlchars: 2.2.0
     dev: false
 
   /saxes@6.0.0:
@@ -8777,6 +9190,11 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /strip-bom@4.0.0:
+    resolution: {integrity: sha512-3xurFv5tEgii33Zi8Jtp55wEIILR9eh34FAW00PZf+JnSsTmV/ioewSgQl97JHvgjoRGwPShsWm+IdrxB35d0w==}
+    engines: {node: '>=8'}
+    dev: false
+
   /strip-eof@1.0.0:
     resolution: {integrity: sha512-7FCwGGmx8mD5xQd3RPUvnSpUXHM3BWuzjtpD4TXsfcZ9EL4azvVVUscFYwD9nx8Kh+uCBC00XBtAykoMHwTh8Q==}
     engines: {node: '>=0.10.0'}
@@ -8847,7 +9265,7 @@ packages:
     dependencies:
       '@swc/core': 1.10.8
       '@swc/counter': 0.1.3
-      webpack: 5.69.1(@swc/core@1.10.8)(webpack-cli@6.0.1)
+      webpack: 5.69.1(@swc/core@1.10.8)(webpack-cli@4.9.2)
     dev: true
 
   /symbol-tree@3.2.4:
@@ -8896,7 +9314,7 @@ packages:
       schema-utils: 4.3.0
       serialize-javascript: 6.0.2
       terser: 5.37.0
-      webpack: 5.69.1(@swc/core@1.10.8)(webpack-cli@6.0.1)
+      webpack: 5.69.1(@swc/core@1.10.8)(webpack-cli@4.9.2)
     dev: true
 
   /terser@5.37.0:

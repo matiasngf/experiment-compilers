@@ -1,0 +1,51 @@
+{
+  "name": "react-jscad-fiber",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite build --mode development --watch",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\""
+  },
+  "keywords": [],
+  "author": "matiasngf",
+  "license": "ISC",
+  "dependencies": {
+    "its-fine": "^1.2.5",
+    "react-reconciler": "^0.27.0",
+    "@jscad/core": "^2.6.12",
+    "@jscad/modeling": "^2.12.5",
+    "@jscad/regl-renderer": "^2.6.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.8",
+    "@types/react-reconciler": "^0.28.9",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.1.0",
+    "react": "^18.3.1",
+    "typescript": "^5.7.2",
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}

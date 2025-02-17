@@ -1,3 +1,4 @@
 packages:
   - 'fiber/*'
   - 'fiber/react-ascii/examples/*'
+  - 'fiber/react-jscad-fiber/examples/*'
