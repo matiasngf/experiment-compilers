@@ -11,9 +11,6 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@jscad/core": "^2.6.12",
-    "@jscad/modeling": "^2.12.5",
-    "@jscad/regl-renderer": "^2.6.12",
     "react-jscad-fiber": "workspace:*"
   },
   "devDependencies": {

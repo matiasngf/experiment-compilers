@@ -41,28 +41,6 @@ export class PrimitiveSolid<T extends CadSolidParams> extends CadSolid {
   }
 }
 
-// export type SphereProps = CadSolidParams & SphereOptions
-
-// export function createSphereFiber({ color, smoothNormals, ...props }: SphereProps) {
-//   return new PrimitiveSolid<SphereProps>({
-//     type: 'sphere',
-//     primitiveParams: props,
-//     color,
-//     smoothNormals
-//   })
-// }
-
-// export type CuboidProps = CadSolidParams & CuboidOptions
-
-// export function createCuboidFiber({ color, smoothNormals, ...props }: CuboidProps) {
-//   return new PrimitiveSolid<CuboidProps>({
-//     type: 'cuboid',
-//     primitiveParams: props,
-//     color,
-//     smoothNormals
-//   })
-// }
-
 export type PrimitiveType = keyof typeof primitives
 
 export function createPrimitive3dFiber(
