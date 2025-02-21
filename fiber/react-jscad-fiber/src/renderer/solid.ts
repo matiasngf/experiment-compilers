@@ -30,6 +30,7 @@ export abstract class CadSolid {
 
   getEntity(): Entity[] {
     if (this.needsUpdate) {
+      const prev = this.solid
       this.entities = entitiesFromSolids(
         {
           smoothNormals: this.smoothNormals || false,
@@ -38,6 +39,10 @@ export abstract class CadSolid {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.solid as any
       )
+      // gc
+      const namespace = { prev } as Record<string, unknown>
+      delete namespace.prev
+
       this.needsUpdate = false
     }
 

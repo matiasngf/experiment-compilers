@@ -31,7 +31,12 @@ export class PrimitiveSolid<T extends CadSolidParams> extends CadSolid {
     this.smoothNormals = smoothNormals
 
     this.primitiveParams = { ...this.primitiveParams, ...props }
+    const prev = this.solid
     this.solid = this.builder(this.primitiveParams)
+    // gc
+    const namespace = { prev } as Record<string, unknown>
+    delete namespace.prev
+
     this.needsUpdate = true
   }
 }

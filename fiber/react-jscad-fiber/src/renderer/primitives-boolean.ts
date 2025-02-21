@@ -39,8 +39,12 @@ export class PrimitiveBoolean extends CadSolid {
 
   private updateBuild() {
     try {
+      const prev = this.solid
       const g = this.builder(...this.children.array.map(c => c.solid))
       this.solid = g
+      // gc
+      const namespace = { prev } as Record<string, unknown>
+      delete namespace.prev
       this.needsUpdate = true
     } catch (_error) {
       // ignore
