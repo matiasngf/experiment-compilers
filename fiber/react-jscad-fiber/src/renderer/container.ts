@@ -3,6 +3,7 @@
 import { cameras, drawCommands, prepareRender } from '@jscad/regl-renderer'
 import type { Entity } from '@jscad/regl-renderer/types/geometry-utils-V2/entity'
 import { CadSolid } from './solid'
+import { ChildrenManager } from './children-manager'
 
 const perspectiveCamera = cameras.perspective
 
@@ -75,24 +76,11 @@ export class Container {
     perspectiveCamera.update(this.camera, this.camera)
   }
 
-  public children: CadSolid[] = []
-
-  public addChild(child: CadSolid) {
-    this.children.push(child)
-  }
-
-  public removeChild(child: CadSolid) {
-    this.children = this.children.filter(c => c.id !== child.id)
-  }
-
-  public addChildBefore(child: CadSolid, beforeChild: CadSolid) {
-    this.children = this.children.filter(c => c !== child)
-    this.children.splice(this.children.indexOf(beforeChild), 0, child)
-  }
+  public children = new ChildrenManager<CadSolid>()
 
   public render() {
     this.renderOptions.entities = []
-    this.children.forEach(child => {
+    this.children.array.forEach(child => {
       this.renderOptions.entities.push(...child.getEntity())
     })
     this.renderer(this.renderOptions)

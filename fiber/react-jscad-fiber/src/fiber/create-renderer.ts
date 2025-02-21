@@ -2,7 +2,14 @@ import ReactReconciler from 'react-reconciler'
 import { DefaultEventPriority } from 'react-reconciler/constants'
 
 import { AsciiReconciler } from './types'
-import { createInstance, commitUpdate } from './instances'
+import {
+  createInstance,
+  commitUpdate,
+  appendChild,
+  appendInitialChild,
+  removeChild,
+  insertBefore
+} from './instances'
 
 export function createRenderer() {
   const reconciler = (ReactReconciler as AsciiReconciler)({
@@ -20,41 +27,10 @@ export function createRenderer() {
     createInstance,
     commitUpdate,
     getPublicInstance: instance => instance, // refs
-    insertBefore: () => {
-      // Empty for now
-    },
-    removeChild(_parentInstance, _childInstance) {
-      /** For now, no instances can have children
-       * Furure implementation:
-       */
-      // if ('removeChild' in parent) {
-      //   _parentInstance.removeChild(_childInstance)
-      // } else {
-      //   throw new Error('Parent does not support removeChild')
-      // }
-    },
-    appendInitialChild(_parentInstance, _childInstance) {
-      return null
-      /** For now, no instances can have children
-       * Possible implementation:
-       */
-      // if ('addChild' in parent) {
-      //   _parentInstance.addChild(_childInstance)
-      // } else {
-      //   throw new Error('Parent does not support addChild')
-      // }
-    },
-    appendChild(_parentInstance, _childInstance) {
-      return null
-      /** For now, no instances can have children
-       * Possible implementation:
-       */
-      // if ('addChild' in _parentInstance) {
-      //   _parentInstance.addChild(_childInstance)
-      // } else {
-      //   throw new Error('Parent does not support addChild')
-      // }
-    },
+    insertBefore,
+    removeChild,
+    appendInitialChild,
+    appendChild,
     prepareUpdate: (_instance, _type, _oldProps, _newProps, _rootContainer, _hostContext) => {
       // optionally intercept props when changing
       return true
@@ -64,20 +40,20 @@ export function createRenderer() {
 
     // --------- Container operations ---------
     appendChildToContainer(rootContainer, childInstance) {
-      rootContainer.addChild(childInstance)
+      rootContainer.children.add(childInstance)
     },
 
     clearContainer(rootContainer) {
-      rootContainer.children.forEach(child => {
-        rootContainer.removeChild(child)
+      rootContainer.children.array.forEach(child => {
+        rootContainer.children.remove(child)
       })
     },
     removeChildFromContainer(rootContainer, childInstance) {
-      rootContainer.removeChild(childInstance)
+      rootContainer.children.remove(childInstance)
     },
     detachDeletedInstance: () => {},
     insertInContainerBefore: (parent, child, beforeChild) => {
-      parent.addChildBefore(child, beforeChild)
+      parent.children.insertBefore(child, beforeChild)
     },
 
     // --------- Text instances ---------

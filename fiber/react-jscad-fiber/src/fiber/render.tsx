@@ -2,7 +2,6 @@
 import { Container } from '@/renderer/container'
 import { createRenderer } from './create-renderer'
 import type React from 'react'
-import { FiberProvider } from 'its-fine'
 import { FiberRoot } from 'react-reconciler'
 import { version } from 'react'
 
@@ -47,9 +46,7 @@ export function render(element: React.ReactNode, target: HTMLElement) {
     instances.set(target, root)
   }
 
-  const Element = () => <FiberProvider>{element}</FiberProvider>
-
-  reconciler.updateContainer(<Element />, root.fiberRoot, null, () => undefined)
+  reconciler.updateContainer(element, root.fiberRoot, null, () => undefined)
   reconciler.injectIntoDevTools({
     bundleType: __DEV__ ? 1 : 0,
     // Reporting React DOM's version

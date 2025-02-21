@@ -1,8 +1,6 @@
 import { primitives } from '@jscad/modeling'
 import { CadSolid, CadSolidParams } from './solid'
-import type { CuboidOptions } from '@jscad/modeling/src/primitives/cuboid'
 import { Geom3 } from '@jscad/modeling/src/geometries/types'
-import { SphereOptions } from '@jscad/modeling/src/primitives'
 
 interface CreatePrimitiveSolidParams<T> extends CadSolidParams {
   type: keyof typeof primitives
@@ -29,29 +27,51 @@ export class PrimitiveSolid<T extends CadSolidParams> extends CadSolid {
   }
 
   public updateProps({ color, smoothNormals, ...props }: T) {
+    this.color = color
+    this.smoothNormals = smoothNormals
+
+    this.primitiveParams = { ...this.primitiveParams, ...props }
+    this.solid = this.builder(this.primitiveParams)
     this.needsUpdate = true
-    this.solid = this.builder({ ...this.primitiveParams, ...props, color, smoothNormals })
   }
 }
 
-export type SphereProps = CadSolidParams & SphereOptions
+// export type SphereProps = CadSolidParams & SphereOptions
 
-export function createSphereFiber({ color, smoothNormals, ...props }: SphereProps) {
-  return new PrimitiveSolid<SphereProps>({
-    type: 'sphere',
+// export function createSphereFiber({ color, smoothNormals, ...props }: SphereProps) {
+//   return new PrimitiveSolid<SphereProps>({
+//     type: 'sphere',
+//     primitiveParams: props,
+//     color,
+//     smoothNormals
+//   })
+// }
+
+// export type CuboidProps = CadSolidParams & CuboidOptions
+
+// export function createCuboidFiber({ color, smoothNormals, ...props }: CuboidProps) {
+//   return new PrimitiveSolid<CuboidProps>({
+//     type: 'cuboid',
+//     primitiveParams: props,
+//     color,
+//     smoothNormals
+//   })
+// }
+
+export type PrimitiveType = keyof typeof primitives
+
+export function createPrimitive3dFiber(
+  type: PrimitiveType,
+  { color, smoothNormals, ...props }: CadSolidParams & unknown
+) {
+  return new PrimitiveSolid<CadSolidParams>({
+    type,
     primitiveParams: props,
     color,
     smoothNormals
   })
 }
 
-export type CuboidProps = CadSolidParams & CuboidOptions
-
-export function createCuboidFiber({ color, smoothNormals, ...props }: CuboidProps) {
-  return new PrimitiveSolid<CuboidProps>({
-    type: 'cuboid',
-    primitiveParams: props,
-    color,
-    smoothNormals
-  })
+export const isPrimitiveType = (type: string): type is PrimitiveType => {
+  return type in primitives
 }

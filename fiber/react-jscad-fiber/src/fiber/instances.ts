@@ -1,25 +1,15 @@
-import { InstanceType, ReconcilerConfig } from './types'
-import {
-  createCuboidFiber,
-  createSphereFiber,
-  CuboidProps,
-  SphereProps
-} from '@/renderer/primitives-3d'
+import { createBooleanFiber, isBooleanType } from '@/renderer/primitives-boolean'
+import { ReconcilerConfig } from './types'
+import { createPrimitive3dFiber, isPrimitiveType } from '@/renderer/primitives-3d'
 
 export const createInstance: ReconcilerConfig['createInstance'] = (type, props) => {
-  switch (type) {
-    case InstanceType.Sphere: {
-      const sphereProps = props as SphereProps
-      return createSphereFiber(sphereProps)
-    }
-    case InstanceType.Cuboid: {
-      const cuboidProps = props as CuboidProps
-      return createCuboidFiber(cuboidProps)
-    }
-
-    default:
-      throw new Error(`Unknown instance type: ${type}`)
+  if (isPrimitiveType(type)) {
+    return createPrimitive3dFiber(type, props)
   }
+  if (isBooleanType(type)) {
+    return createBooleanFiber(type, props)
+  }
+  throw new Error(`Unknown instance type: ${type}`)
 }
 
 export const commitUpdate: ReconcilerConfig['commitUpdate'] = (
@@ -32,5 +22,29 @@ export const commitUpdate: ReconcilerConfig['commitUpdate'] = (
 ) => {
   if ('updateProps' in instance) {
     instance.updateProps(nextProps)
+  }
+}
+
+export const appendChild: ReconcilerConfig['appendChild'] = (instance, child) => {
+  if (instance.children) {
+    instance.children.add(child)
+  }
+}
+
+export const removeChild: ReconcilerConfig['removeChild'] = (instance, child) => {
+  if (instance.children) {
+    instance.children.remove(child)
+  }
+}
+
+export const insertBefore: ReconcilerConfig['insertBefore'] = (instance, child, before) => {
+  if (instance.children) {
+    instance.children.insertBefore(child, before)
+  }
+}
+
+export const appendInitialChild: ReconcilerConfig['appendInitialChild'] = (instance, child) => {
+  if (instance.children) {
+    instance.children.add(child)
   }
 }
