@@ -411,15 +411,6 @@ importers:
 
   fiber/react-jscad-fiber/examples/basic:
     dependencies:
-      '@jscad/core':
-        specifier: ^2.6.12
-        version: 2.6.12
-      '@jscad/modeling':
-        specifier: ^2.12.5
-        version: 2.12.5
-      '@jscad/regl-renderer':
-        specifier: ^2.6.12
-        version: 2.6.12
       react:
         specifier: ^18.2.0
         version: 18.3.1
