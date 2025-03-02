@@ -29,9 +29,10 @@ export class PrimitiveTransform extends CadSolid<CadSolid> {
 
     this.children.onChange(() => {
       this.needsUpdate = true
+      this.updateSolid()
     })
 
-    this.needsUpdate = true
+    this.updateSolid()
   }
 
   public updateProps({ color, smoothNormals, ...transformParams }: TransformParams) {
@@ -42,6 +43,11 @@ export class PrimitiveTransform extends CadSolid<CadSolid> {
   }
 
   private updateSolid() {
+    if (this.children.array.length === 0) {
+      this.solid = geometries.geom3.create()
+      this.needsUpdate = true
+      return
+    }
     this.solid = union(...(this.children.array.map(c => c.solid) as Geom3[]))
 
     const { position, rotation, scale, matrix: customMatrix } = this.transformParams
@@ -79,6 +85,8 @@ export class PrimitiveTransform extends CadSolid<CadSolid> {
 
   getEntity(): Entity[] {
     const childrenNeedsUpdate = this.children.array.some(c => c.needsUpdate)
+    // This is not performant, the getEntity and solid updates logic should be separated
+    this.children.array.forEach(c => (c as CadSolid).getEntity())
     if (childrenNeedsUpdate) {
       this.updateSolid()
     }

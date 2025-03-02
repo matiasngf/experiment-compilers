@@ -2,12 +2,12 @@ import { primitives } from '@jscad/modeling'
 import { CadSolid, CadSolidParams } from '../solid'
 import { Geom3 } from '@jscad/modeling/src/geometries/types'
 interface CreatePrimitiveSolidParams<T> extends CadSolidParams {
-  type: keyof typeof primitives
+  type: PrimitiveType
   primitiveParams: T
 }
 
 export class PrimitiveSolid<T extends CadSolidParams> extends CadSolid {
-  private type: keyof typeof primitives
+  private type: PrimitiveType
   private primitiveParams: T
   public solid: Geom3
 
@@ -40,7 +40,22 @@ export class PrimitiveSolid<T extends CadSolidParams> extends CadSolid {
   }
 }
 
-export type PrimitiveType = keyof typeof primitives
+export type PrimitiveType = keyof Omit<
+  typeof primitives,
+  | 'arc'
+  | 'circle'
+  | 'ellipse'
+  | 'line'
+  | 'polygon'
+  | 'polyhedron'
+  | 'rectangle'
+  | 'roundedCuboid'
+  | 'roundedCylinder'
+  | 'roundedRectangle'
+  | 'star'
+  | 'torus'
+  | 'triangle'
+>
 
 export function createPrimitive3dFiber(
   type: PrimitiveType,

@@ -55,6 +55,8 @@ export class PrimitiveBoolean extends CadSolid<CadSolid> {
 
   getEntity(): Entity[] {
     const childrenNeedsUpdate = this.children.array.some(c => c.needsUpdate)
+    // This is not performant, the getEntity and solid updates logic should be separated
+    this.children.array.forEach(c => (c as CadSolid).getEntity())
     if (childrenNeedsUpdate) {
       this.updateSolid()
     }
