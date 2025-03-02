@@ -2,6 +2,7 @@
 import { createBooleanFiber, isBooleanType } from '@/renderer/instances/primitives-boolean'
 import { ReconcilerConfig } from './types'
 import { createPrimitive3dFiber, isPrimitiveType } from '@/renderer/instances/primitives-3d'
+import { createTransformFiber, isTransformType } from '@/renderer/instances/primitives-transform'
 
 export const createInstance: ReconcilerConfig['createInstance'] = (type, props) => {
   if (isPrimitiveType(type)) {
@@ -9,6 +10,9 @@ export const createInstance: ReconcilerConfig['createInstance'] = (type, props) 
   }
   if (isBooleanType(type)) {
     return createBooleanFiber(type, props)
+  }
+  if (isTransformType(type)) {
+    return createTransformFiber(props)
   }
   throw new Error(`Unknown instance type: ${type}`)
 }

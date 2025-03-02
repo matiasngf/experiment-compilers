@@ -6,7 +6,9 @@ export default function App() {
       <subtract color={[0.2, 0.2, 0.2]}>
         <sphere radius={130} />
         <sphere center={[70, 0, 70]} radius={100} />
-        <sphere center={[-70, 0, 70]} radius={100} />
+        <transform scale={3}>
+          <sphere center={[-70, 0, 70]} radius={100} />
+        </transform>
       </subtract>
     </Canvas>
   )

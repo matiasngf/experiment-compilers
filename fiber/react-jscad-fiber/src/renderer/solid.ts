@@ -17,6 +17,7 @@ export abstract class CadSolid<Children = unknown> {
 
   public isCadSolid = true
 
+  /** True if the solid has changed and the solid needs to be re-created */
   public needsUpdate = false
   public entities: Entity[] = []
 

@@ -28,6 +28,7 @@ import {
 import { PropsWithChildren } from 'react'
 import type Reconciler from 'react-reconciler'
 import type { HostConfig } from 'react-reconciler'
+import { PrimitiveTransform, TransformParams } from '@/renderer/instances/primitives-transform'
 
 export type Root = { fiber: Reconciler.FiberRoot }
 
@@ -61,15 +62,22 @@ export type BooleanElements = {
   scission: PropsWithChildren<CadSolidParams>
 }
 
-export type AsciiElements = SolidElements & BooleanElements
+export type TransformElements = {
+  transform: TransformParams & { children?: React.ReactNode }
+}
+
+export type AsciiElements = SolidElements & BooleanElements & TransformElements
 
 export type InstanceProps = AsciiElements[keyof AsciiElements]
 export type InstanceType = keyof AsciiElements
 
+// Instances types
 export type SolidInstance = PrimitiveSolid<InstanceProps>
 export type BooleanInstance = PrimitiveBoolean
+export type TransformInstance = PrimitiveTransform
 
-export type Instance = SolidInstance | BooleanInstance
+// Union of all instances
+export type Instance = SolidInstance | BooleanInstance | TransformInstance
 
 export interface ReconcilierArgs {
   type: keyof AsciiElements

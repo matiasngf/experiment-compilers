@@ -82,6 +82,7 @@ export class Container {
 
   public render() {
     this.renderOptions.entities = []
+
     this.children.array.forEach(child => {
       this.renderOptions.entities.push(...child.getEntity())
     })

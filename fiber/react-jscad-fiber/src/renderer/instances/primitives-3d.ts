@@ -1,7 +1,6 @@
 import { primitives } from '@jscad/modeling'
 import { CadSolid, CadSolidParams } from '../solid'
 import { Geom3 } from '@jscad/modeling/src/geometries/types'
-
 interface CreatePrimitiveSolidParams<T> extends CadSolidParams {
   type: keyof typeof primitives
   primitiveParams: T

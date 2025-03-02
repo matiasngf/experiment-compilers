@@ -29,17 +29,17 @@ export class PrimitiveBoolean extends CadSolid<CadSolid> {
     this.needsUpdate = true
 
     this.children.onChange(() => {
-      this.updateBuild()
+      this.updateSolid()
     })
   }
 
   public updateProps({ color, smoothNormals }: CadSolidParams) {
     this.color = color
     this.smoothNormals = smoothNormals
-    this.updateBuild()
+    this.updateSolid()
   }
 
-  private updateBuild() {
+  private updateSolid() {
     try {
       const prev = this.solid
       const g = this.builder(...this.children.array.map(c => c.solid))
@@ -56,7 +56,7 @@ export class PrimitiveBoolean extends CadSolid<CadSolid> {
   getEntity(): Entity[] {
     const childrenNeedsUpdate = this.children.array.some(c => c.needsUpdate)
     if (childrenNeedsUpdate) {
-      this.updateBuild()
+      this.updateSolid()
     }
 
     this.children.array.forEach(c => {
