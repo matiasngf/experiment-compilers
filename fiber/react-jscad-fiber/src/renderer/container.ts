@@ -2,8 +2,8 @@
 
 import { cameras, drawCommands, prepareRender } from '@jscad/regl-renderer'
 import type { Entity } from '@jscad/regl-renderer/types/geometry-utils-V2/entity'
-import { CadSolid } from './solid'
-import { ChildrenManager } from './children-manager'
+import { CadSolid, isCadSolid } from './solid'
+import { ChildrenManager } from '../utils/children-manager'
 
 const perspectiveCamera = cameras.perspective
 
@@ -76,7 +76,9 @@ export class Container {
     perspectiveCamera.update(this.camera, this.camera)
   }
 
-  public children = new ChildrenManager<CadSolid>()
+  public children = new ChildrenManager<CadSolid>({
+    validator: isCadSolid
+  })
 
   public render() {
     this.renderOptions.entities = []

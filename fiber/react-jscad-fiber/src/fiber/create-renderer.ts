@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ReactReconciler from 'react-reconciler'
 import { DefaultEventPriority } from 'react-reconciler/constants'
 
@@ -40,20 +41,20 @@ export function createRenderer() {
 
     // --------- Container operations ---------
     appendChildToContainer(rootContainer, childInstance) {
-      rootContainer.children.add(childInstance)
+      rootContainer.children.add(childInstance as any)
     },
 
     clearContainer(rootContainer) {
       rootContainer.children.array.forEach(child => {
-        rootContainer.children.remove(child)
+        rootContainer.children.remove(child as any)
       })
     },
     removeChildFromContainer(rootContainer, childInstance) {
-      rootContainer.children.remove(childInstance)
+      rootContainer.children.remove(childInstance as any)
     },
     detachDeletedInstance: () => {},
     insertInContainerBefore: (parent, child, beforeChild) => {
-      parent.children.insertBefore(child, beforeChild)
+      parent.children.insertBefore(child as any, beforeChild as any)
     },
 
     // --------- Text instances ---------

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Container } from '@/renderer/container'
-import { PrimitiveSolid } from '@/renderer/primitives-3d'
-import { PrimitiveBoolean } from '@/renderer/primitives-boolean'
+import { PrimitiveSolid } from '@/renderer/instances/primitives-3d'
+import { PrimitiveBoolean } from '@/renderer/instances/primitives-boolean'
 import { CadSolidParams } from '@/renderer/solid'
 import {
   ArcOptions,

@@ -1,7 +1,7 @@
 import { booleans, geometries } from '@jscad/modeling'
 
-import { CadSolid, CadSolidParams } from './solid'
-import { ChildrenManager } from './children-manager'
+import { CadSolid, CadSolidParams, isCadSolid } from '../solid'
+import { ChildrenManager } from '../../utils/children-manager'
 import { Geom3 } from '@jscad/modeling/src/geometries/types'
 import { Entity } from '@jscad/regl-renderer/types/geometry-utils-V2/entity'
 
@@ -9,13 +9,15 @@ interface CreatePrimitiveBooleanParams extends CadSolidParams {
   type: keyof typeof booleans
 }
 
-export class PrimitiveBoolean extends CadSolid {
+export class PrimitiveBoolean extends CadSolid<CadSolid> {
   private type: keyof typeof booleans
   public solid: Geom3 = geometries.geom3.create()
 
   private builder: (...props: unknown[]) => Geom3
 
-  public children = new ChildrenManager<CadSolid>()
+  public children = new ChildrenManager<CadSolid>({
+    validator: isCadSolid
+  })
 
   constructor({ type, ...solidParams }: CreatePrimitiveBooleanParams) {
     super(solidParams)

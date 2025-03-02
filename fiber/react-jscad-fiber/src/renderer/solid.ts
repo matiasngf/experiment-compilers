@@ -1,7 +1,7 @@
 import type { Entity } from '@jscad/regl-renderer/types/geometry-utils-V2/entity'
 import type { Geom3, Geom2 } from '@jscad/modeling/src/geometries/types'
 import { entitiesFromSolids } from '@jscad/regl-renderer'
-import { ChildrenManager } from './children-manager'
+import { ChildrenManager } from '../utils/children-manager'
 
 /** This class will transform jscad operations into renderable entities */
 
@@ -10,15 +10,17 @@ export interface CadSolidParams {
   color?: number[]
 }
 
-export abstract class CadSolid {
+export abstract class CadSolid<Children = unknown> {
   public id: string
   public smoothNormals?: boolean
   public color?: number[]
 
+  public isCadSolid = true
+
   public needsUpdate = false
   public entities: Entity[] = []
 
-  public children?: ChildrenManager<unknown>
+  public children?: ChildrenManager<Children>
 
   abstract solid: Geom3 | Geom2
 
@@ -48,4 +50,8 @@ export abstract class CadSolid {
 
     return this.entities
   }
+}
+
+export function isCadSolid(c: unknown): c is CadSolid {
+  return typeof c === 'object' && c !== null && 'isCadSolid' in c && c.isCadSolid === true
 }
