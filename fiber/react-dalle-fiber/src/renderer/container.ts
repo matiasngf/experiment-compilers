@@ -26,12 +26,16 @@ export class Container {
 
   get prompt() {
     return `
-      I have a structure that describes my scene.
-      This structure is a JSON object that represents a scene that you need to draw like a painting.
-      Even tho it's expressed in JSON, this IT IS NOT A UI, it can be a realistic image or painting.
-      This is more like a description of a scene, not a UI.
-      STRUCTURE:
-      ${JSON.stringify(this.children.array.map(c => c.getJson()))}
+I want you to create an image from a structure that describes my scene.
+This structure is a JSON object that represents a scene that you need to draw like a painting.
+Even tho it's expressed in JSON, this IT IS NOT A UI, it can be a realistic image or painting.
+This is more like a description of a scene, not a UI.
+On each object, the objectType prop describes what the object is.
+The children prop is an array of objects represents objects that are inside or depend of the parent object, its used to describe relations between objects.
+Make the best you can to interpret the intentions on the user when creating the structure.
+
+STRUCTURE:
+${JSON.stringify(this.children.array.map(c => c.getJson()))}
     `
   }
 
