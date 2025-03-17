@@ -6,7 +6,8 @@
     "build": "webpack",
     "start": "node dist/bundle.js",
     "build-start": "webpack && node dist/bundle.js",
-    "dev": "NODE_ENV=development webpack --watch"
+    "dev": "NODE_ENV=development webpack --watch",
+    "dev-watch": "npm run dev & nodemon --quiet --watch dist --ext js,jsx,ts,tsx --exec 'npm run start'"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -20,6 +21,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^9.17.0",
     "fork-ts-checker-webpack-plugin": "^7.2.1",
+    "nodemon": "^3.1.0",
     "swc-loader": "^0.2.6",
     "typescript": "~5.6.3",
     "typescript-eslint": "^8.18.2",

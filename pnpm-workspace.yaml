@@ -3,3 +3,4 @@ packages:
   - 'fiber/react-ascii/examples/*'
   - 'fiber/react-jscad-fiber/examples/*'
   - 'fiber/react-dalle-fiber/examples/*'
+  - 'fiber/react-jimp-fiber/examples/*'

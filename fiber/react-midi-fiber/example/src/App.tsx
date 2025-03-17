@@ -5,7 +5,7 @@ import { Midi } from '@tonejs/midi'
 
 import { render } from 'react-midi-fiber'
 
-import { SpaceAdventure } from './music'
+import { SpaceAdventure } from './examples/music'
 
 function Player() {
   const [isPlaying, setIsPlaying] = useState(false)
