@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc && node dist/index.js",
+    "demo": "tsc && node dist/index.js",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.18",
+    "@types/react-reconciler": "^0.28.9",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "eslint": "^8.54.0",

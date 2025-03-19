@@ -15,8 +15,8 @@ export const drawScene = async (elements: React.JSX.Element[], outputPath: Outpu
   await createFolder(outputPath)
   // Create a new hsl(0, 0%, 0%) background image
   const background = new Jimp({
-    width: 1920,
-    height: 1080,
+    width: 1000,
+    height: 1000,
     color: 0x000000ff
   })
 
