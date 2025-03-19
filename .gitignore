@@ -2,3 +2,4 @@ node_modules
 dist
 todo
 .src
+.DS_Store
