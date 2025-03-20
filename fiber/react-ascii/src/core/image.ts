@@ -21,6 +21,8 @@ export class Image {
   /** Position */
   position: Vec2
 
+  private originalImage: JimpImage | null = null
+
   private _image: JimpImage | null = null
   /** Is the image loaded. */
   public loaded: boolean = false
@@ -34,14 +36,33 @@ export class Image {
     Jimp.read(this.src)
       .then(img => {
         const image = img as JimpImage
-        image.scale(this._scale)
-        this._image = image
+        this.originalImage = image
+        this.applyImage()
         this.loaded = true
         params.onLoad?.()
       })
       .catch(error => {
         params.onError?.(error)
       })
+  }
+
+  private applyImage() {
+    if (!this.originalImage) {
+      return
+    }
+
+    const img = this.originalImage.clone()
+    img.scale(this._scale)
+    this._image = img
+  }
+
+  public setSrc(value: string | Buffer | ArrayBuffer) {
+    this.src = value
+    Jimp.read(this.src).then(img => {
+      const image = img as JimpImage
+      this.originalImage = image
+      this.applyImage()
+    })
   }
 
   /** Get the image data, will throw an error if the image is not loaded */
@@ -63,8 +84,6 @@ export class Image {
   /** Set the scale of the image */
   set scale(value: number) {
     this._scale = value
-    if (this._image) {
-      this._image.scale(this._scale)
-    }
+    this.applyImage()
   }
 }

@@ -8,7 +8,8 @@ export const createInstance: ReconcilerConfig['createInstance'] = (type, props) 
       const imageProps = props as ImageProps
       return new Image({
         src: imageProps.src,
-        position: imageProps.position
+        position: imageProps.position,
+        scale: imageProps.scale
       })
     }
     case InstanceType.AsciiColor: {
@@ -36,8 +37,10 @@ export const commitUpdate: ReconcilerConfig['commitUpdate'] = (
   if (instance instanceof Image) {
     const imagePrevProps = prevProps as ImageProps
     const imageNextProps = nextProps as ImageProps
+    if (imagePrevProps.scale !== imageNextProps.scale) {
+      instance.scale = imageNextProps.scale ?? 1
+    }
 
-    if (imagePrevProps.src !== imageNextProps.src) instance.src = imageNextProps.src
     if (
       imagePrevProps.position.x !== imageNextProps.position.x ||
       imagePrevProps.position.y !== imageNextProps.position.y
@@ -45,6 +48,7 @@ export const commitUpdate: ReconcilerConfig['commitUpdate'] = (
       instance.position.x = imageNextProps.position.x
       instance.position.y = imageNextProps.position.y
     }
+    if (imagePrevProps.src !== imageNextProps.src) instance.setSrc(imageNextProps.src)
   }
 
   if (instance instanceof Color) {

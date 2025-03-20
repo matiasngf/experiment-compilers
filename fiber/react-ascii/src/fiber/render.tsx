@@ -2,10 +2,12 @@
 import { Renderer } from '@/core/renderer'
 import { createRenderer } from './create-renderer'
 import type React from 'react'
-import { FiberProvider } from 'its-fine'
+import { FiberProvider as FP } from 'its-fine'
 import { FiberRoot } from 'react-reconciler'
 import { startRafRunner } from '@/core/utils/raf'
 import type { RendererOptions } from '@/core/renderer'
+
+const FiberProvider = FP as any
 
 const reconciler = createRenderer()
 
@@ -32,7 +34,11 @@ export function render(element: React.ReactNode, options: RendererOptions = {}) 
     instances[instanceKey] = root
   }
 
-  const Element = () => <FiberProvider>{element}</FiberProvider>
+  const Element = () => (
+    <>
+      <FiberProvider>{element}</FiberProvider>
+    </>
+  )
 
   reconciler.updateContainer(<Element />, root, null, () => {
     // render complete, start frame loop

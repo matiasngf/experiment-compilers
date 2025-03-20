@@ -19,6 +19,7 @@ export enum InstanceType {
 
 export interface ImageProps {
   src: string | Buffer
+  scale?: number
   position: Vec2
 }
 
