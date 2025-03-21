@@ -3,13 +3,10 @@ import { Canvas } from 'react-jscad-fiber'
 export default function App() {
   return (
     <Canvas>
-      <subtract color={[0.2, 0.2, 0.2]}>
+      <union color={[0.2, 0.2, 0.2]}>
         <sphere radius={130} />
         <sphere center={[70, 0, 70]} radius={100} />
-        <transform scale={7} rotation={[0, 0, 90]}>
-          <sphere center={[-70, 0, 70]} radius={100} />
-        </transform>
-      </subtract>
+      </union>
     </Canvas>
   )
 }
