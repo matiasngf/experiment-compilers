@@ -7,8 +7,9 @@ const App = () => (
       <jimpFigure src="asteroid.png" scale={0.5} rotation={15} />
       <jimpFigure src="asteroid.png" x={250} y={50} scale={0.2} />
     </group>
-    <jimpFigure src="spaceship.png" x={100} y={400} scale={1} />
+    <jimpFigure src="spaceship.png" x={200} y={400} scale={1} />
   </>
 )
 
+// only renders once :(
 render(<App />, './build/output_scene.png')

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack",
     "start": "node dist/bundle.js",
-    "build-start": "webpack && node dist/bundle.js",
+    "demo-1": "webpack && node dist/bundle.js",
     "dev": "NODE_ENV=development webpack --watch",
     "demo": "npm run dev & nodemon --quiet --watch dist --ext js,jsx,ts,tsx --exec 'npm run start'"
   },
